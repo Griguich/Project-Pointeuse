@@ -1,0 +1,74 @@
+<div class="general-contenu">
+  <div class="clock-tablette row">
+    <div class="left-content col-7">
+      <div *ngIf="!displayKeyBoardLive" class="logo mt-3 style-logo-clock rotate linear infinite">
+        <img src="assets/icons/header/Logo_MyRHIS.svg">
+      </div>
+      <div class="time-pointeuse">{{ heureCourant | date:'HH:mm' }}</div>
+      <div *ngIf="authorizationIdle>=1 && router.url.length===1 && sessionService.getAutorisation()"
+           class="centreText"
+           id="RESTAURANT_VueL-Auto-exp">
+        <span>{{authorizationLabel}} : {{authorizationIdle}}</span>
+      </div>
+      <div class="name-restaurant-clock">{{ nameRestaurant }}</div>
+      <div *ngIf="this.sessionService.getDisplayDateOption()==='1'" class="day-pointeuse">
+          <span>
+            {{ this.rhisTranslateService.translate("optionAffichageDate.jCalen") + ' : ' + getDay() + (calendarDate|date: 'dd-MM-yyyy')}}
+          </span>
+      </div>
+      <div *ngIf="this.sessionService.getDisplayDateOption()===null" class="day-pointeuse">
+          <span>
+            {{ this.rhisTranslateService.translate("optionAffichageDate.jCalen") + ' : ' + getDay() + (calendarDate|date: 'dd-MM-yyyy')}}
+          </span>
+      </div>
+
+      <div *ngIf="this.sessionService.getDisplayDateOption()=='2'" class="day-pointeuse">
+        <span>{{ this.rhisTranslateService.translate("optionAffichageDate.jActiv") + ' : ' + getjournerActivite() + (jouract|date: 'dd-MM-yyyy') }} </span>
+      </div>
+      <div *ngIf="this.sessionService.getDisplayDateOption()=='3'" class="day-pointeuse">
+          <span>{{ this.rhisTranslateService.translate("optionAffichageDate.jCalen") + ' : ' + getDay() + (calendarDate|date: 'dd-MM-yyyy')}}
+            <br>{{this.rhisTranslateService.translate("optionAffichageDate.jActiv") + ' : ' + getjournerActivite() + (jouract|date: 'dd-MM-yyyy')}}
+          </span>
+      </div>
+
+    </div>
+    <div class="right-content col-5" *ngIf="displayBadgeKeyboard">
+      <div class="clock-keyboard">
+        <div class="input mt-3 mb-3">
+          <input #keyboardInput
+                 autocomplete="off"
+                 class="tablette"
+                 id="codeBadge"
+                 rhisIntegerNumbers
+                 type="text"
+                 inputmode='none'
+                 [placeholder]="passerVotreBadge"
+                 maxlength="15"/>
+          <div class="simple-keyboard"></div>
+        </div>
+
+      </div>
+    </div>
+    <div class="right-content col-5" *ngIf="!displayBadgeKeyboard">
+      <div class="clock-keyboard">
+        <div class="input mt-3 mb-3">
+          <input #keyboardInput
+                 autocomplete="off"
+                 class="tablette"
+                 id="codeBadge"
+                 rhisIntegerNumbers
+                 type="text"
+                 inputmode='none'
+                 [placeholder]="passerVotreBadge"
+                 (focusin)="isBadgeEnteredManually = true"
+                 (focusout)="isBadgeEnteredManually = false"
+                 (keydown.enter)="passBadgeManually(keyboardInput.value)"
+                 maxlength="15"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+

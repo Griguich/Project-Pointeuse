@@ -1,0 +1,186 @@
+[
+   {
+      "idShift": 1,
+      "dateJournee": "2019-09-17",
+      "heureDebut": "14:00",
+      "heureDebutIsNight": false,
+      "heureFin": "16:00",
+      "heureFinIsNight": false,
+      "totalHeure": 120,
+      "typeAbsence": null,
+      "positionTravail": {
+         "couleur": "#C50632",
+         "idPositionTravail": 4466,
+         "libelle": "Cuisine"
+      },
+      "employee": {
+         "idEmployee": 121558,
+         "hebdoCourant": "35:00",
+         "hebdoPlanifie": "22:00",
+         "prenom": "Alexis",
+         "nom": "Vassili",
+         "matricule": "AlVassil"
+      }
+   },
+   {
+      "idShift": 4,
+      "dateJournee": "2019-09-17",
+      "heureDebut": "15:00",
+      "heureDebutIsNight": false,
+      "heureFin": "17:00",
+      "heureFinIsNight": false,
+      "totalHeure": 120,
+      "typeAbsence": null,
+      "positionTravail": {
+         "couleur": "#c4c0c0",
+         "idPositionTravail": 4466,
+         "libelle": "Frite"
+      },
+      "employee": {
+         "idEmployee": 121558,
+         "hebdoCourant": "35:00",
+         "hebdoPlanifie": "22:00",
+         "prenom": "Alexis",
+         "nom": "Vassili",
+         "matricule": "AlVassil"
+      }
+   },
+   {
+      "idShift": 2,
+      "dateJournee": "2019-09-17",
+      "heureDebut": "20:00",
+      "heureDebutIsNight": false,
+      "heureFin": "22:00",
+      "heureFinIsNight": false,
+      "totalHeure": 120,
+      "typeAbsence": "A.I.",
+      "positionTravail": {
+         "couleur": "#C50",
+         "idPositionTravail": 4666,
+         "libelle": "Drive"
+      },
+      "employee": {
+         "idEmployee": 55630,
+         "hebdoCourant": "35:00",
+         "hebdoPlanifie": "23:00",
+         "prenom": "Romane",
+         "nom": "Ollive",
+         "matricule": "ROllive"
+      }
+   },
+   {
+      "idShift": 3,
+      "dateJournee": "2019-09-17",
+      "heureDebut": "00:15",
+      "heureDebutIsNight": true,
+      "heureFin": "03:00",
+      "heureFinIsNight": true,
+      "totalHeure": 165,
+      "typeAbsence": "A.I.",
+      "positionTravail": {
+         "couleur": "#9de8b6",
+         "idPositionTravail": 4166,
+         "libelle": "Caisse"
+      },
+      "employee": {
+         "idEmployee": 34272,
+         "hebdoCourant": "30:00",
+         "hebdoPlanifie": "24:00",
+         "prenom": "Aymen",
+         "nom": "Elarbi",
+         "matricule": "aelarbi2"
+      }
+   },
+   {
+      "idShift": 5,
+      "dateJournee": "2019-09-17",
+      "heureDebut": "15:00",
+      "heureDebutIsNight": false,
+      "heureFin": "17:00",
+      "heureFinIsNight": false,
+      "totalHeure": 120,
+      "typeAbsence": "A.I.",
+      "positionTravail": {
+         "couleur": "#c4c0c0",
+         "idPositionTravail": 4466,
+         "libelle": "Frite"
+      },
+      "employee": {
+         "idEmployee": 87962,
+         "hebdoCourant": "35:00",
+         "hebdoPlanifie": "22:00",
+         "prenom": "Emmanuel",
+         "nom": "de Nicolay",
+         "matricule": "EdN"
+      }
+   },
+   {
+      "idShift": 6,
+      "dateJournee": "2019-09-17",
+      "heureDebut": "17:00",
+      "heureDebutIsNight": false,
+      "heureFin": "19:00",
+      "heureFinIsNight": false,
+      "totalHeure": 120,
+      "typeAbsence": "A.I.",
+      "positionTravail": {
+         "couleur": "#c4c0c0",
+         "idPositionTravail": 4466,
+         "libelle": "Frite"
+      },
+      "employee": {
+         "idEmployee": 111438,
+         "hebdoCourant": "35:00",
+         "hebdoPlanifie": "22:00",
+         "prenom": "Zohra",
+         "nom": "Luiz",
+         "matricule": "AEL"
+      }
+   },
+   {
+      "idShift": 111,
+      "dateJournee": "2019-09-17",
+      "heureDebut": "13:00",
+      "heureDebutIsNight": false,
+      "heureFin": "15:00",
+      "heureFinIsNight": false,
+      "totalHeure": 120,
+      "typeAbsence": null,
+      "positionTravail": {
+         "couleur": "#c4c0c0",
+         "idPositionTravail": 4466,
+         "libelle": "Frite"
+      },
+      "employee": {
+         "idEmployee": 13954,
+         "hebdoCourant": "35:00",
+         "hebdoPlanifie": "22:00",
+         "prenom": "Heikel",
+         "nom": "Souissi",
+         "matricule": "HSO"
+      }
+   },
+   {
+      "idShift": 716,
+      "dateJournee": "2019-09-17",
+      "heureDebut": "13:00",
+      "heureDebutIsNight": false,
+      "heureFin": "15:00",
+      "heureFinIsNight": false,
+      "totalHeure": 120,
+      "typeAbsence": null,
+      "positionTravail": {
+         "couleur": "#c4c0c0",
+         "idPositionTravail": 4466,
+         "libelle": "Frite"
+      },
+      "employee": {
+         "idEmployee": 15273,
+         "hebdoCourant": "35:00",
+         "hebdoPlanifie": "22:00",
+         "prenom": "Heikel",
+         "nom": "Souissi",
+         "matricule": "HSO"
+      }
+   }
+]

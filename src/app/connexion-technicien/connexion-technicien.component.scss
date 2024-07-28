@@ -1,0 +1,90 @@
+@import '../../styles/generique';
+
+.block-auth--bg-color {
+  position: absolute;
+  background: #FFA452;
+  height: calc(100% - 50vh);
+  width: 100%;
+}
+
+.bloc-login__general.technecien {
+  margin: auto 0;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 460px;
+  height: 495px;
+  background: #F7F7F7;
+  padding: 45px;
+  box-shadow: 0 3px 20px 0 rgb(0 0 0 / 15%);
+  @media screen and (max-width: 991px) {
+    width: 400px;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  @media screen and (max-width: 767px) {
+    width: 300px;
+  }
+}
+
+.bloc-login__form {
+  @media screen and (max-width: 991px) {
+    width: 345px;
+  }
+
+  @media screen and (max-width: 767px) {
+    width: 250px;
+  }
+
+  label {
+    width: fit-content;
+    color: #9B9B9B;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 17px;
+    font-family: "TT Wellingtons Medium", sans-serif;
+  }
+}
+
+.titre-principale-auth__form {
+  height: 200px;
+  form {
+    height: 100%;
+  }
+}
+
+.error-auth {
+  color: red;
+}
+
+:host ::ng-deep {
+  .simple-keyboard.hg-theme-default.hg-layout-default,
+  .simple-keyboard.hg-theme-default.hg-layout-shift {
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    font-family: HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+    touch-action: manipulation;
+    max-width: 700px;
+    background: #AFA899;
+    color: #f7f7f7;
+    position: absolute;
+    top: 67px !important;
+    width: 150%;
+
+    .hg-button {
+      background: #ddd;
+      color: #414141;
+    }
+  }
+}
+
+.display__clavier {
+  display: block;
+}
+
+.display__clavier--not {
+  display: none;
+}

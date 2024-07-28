@@ -1,0 +1,20 @@
+:host ::ng-deep {
+  .table-list p-table .ui-table table .ui-table-thead > tr > th,
+  .table-list p-table .ui-table table .ui-table-tbody > tr > td {
+    text-align: left;
+    padding-left: 0;
+
+    &:nth-child(1) {
+      padding: 10px 0 10px 15px;
+      width: 150px;
+    }
+
+    &:nth-child(2) {
+      width: calc(100% - 320px);
+    }
+
+    &:nth-child(3) {
+      width: 170px;
+    }
+  }
+}

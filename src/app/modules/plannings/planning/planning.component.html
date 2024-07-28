@@ -1,0 +1,305 @@
+<div class="block__contenu-page">
+  <div (rhisHeightScrollableSection)="heightInterface = ($event + 'px')" [offset]="310"
+       class="planning-pointeuse_header">
+    <div class="block__contenu-page--top d-flex w-100 justify-content-between">
+      <h2 class="block__contenu-page--top-titre">
+        {{'PLANNING_PAGE_PRINCIPALE.TITLE' | translate}}
+        <span *ngIf="isManager && totalPointingHours">
+          ({{totalPointingHours}}   {{"PLANNING_PAGE_PRINCIPALE.HOURS" | translate}})
+        </span>
+      </h2>
+      <div *ngIf="authorizationIdle>=1 && router.url.length===1 && sessionService.getAutorisation()"
+           id="PLANNING_autoExp-message">
+        {{authorizationLabel}} : {{authorizationIdle}}
+      </div>
+      <div *ngIf="messagePointeuseBloque" class="message-bloque-style"
+           id="PLANNING_pointeuseBloquee-message">
+        {{'PLANNING_PAGE_PRINCIPALE.MESSAGE_POINTEUSE_BLOQUE' | translate}}
+      </div>
+      <div *ngIf="personalizedAccess | userPermission: PLANNING:isManager" class="manager-filter betw ng-star-inserted d-flex justify-content-between">
+        <button (click)="synchro()" *ngIf="isQa"
+                class="btn fitContent button-commun-pointeuse blue-background planning-btn-action"
+                id="PLANNING_filterAll-btn2"
+                type="button">
+          <span>Test synchro régulière</span>
+        </button>
+
+        <button (click)="handleChange()"
+                class="btn fitContent button-commun-pointeuse blue-background planning-btn-action"
+                type="button" >
+          <span>{{btnval}}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="planning-pointeuse_content">
+    <div (scroll)="scrollToRealTime()"
+         class="table-list planning-table position-relative">
+      <div *ngIf="showEmptyMessage"
+           class="w-100 d-flex justify-content-center">{{"EMPLOYEE.AUCUN_MESSAGE" | translate}}</div>
+      <div id="vue-planning">
+        <p-table
+          (onSort)="customSortByEmpl($event)"
+          *ngIf="listEmployees?.length"
+          [columns]="header"
+          [customSort]="true"
+          [scrollHeight]="heightInterface"
+          [scrollable]="true"
+          [style]="{'max-width.px': maxWidthPlanning}"
+          [value]="listEmployees"
+          frozenWidth="140px">
+          <ng-template let-columns pTemplate="colgroup">
+            <colgroup>
+              <col *ngFor="let col of columns; let odd = odd ; trackBy: trackCol" [style.width.px]="odd ? 31 : 30">
+            </colgroup>
+          </ng-template>
+          <ng-template pTemplate="frozenheader">
+            <tr class="header-row" id="table-header-hourly">
+              <th [pSortableColumn]="'prenom'"
+                  [style.width.px]="employeeBlockWidth">
+                <div>
+                  {{"PLANNING_PAGE_PRINCIPALE.EMPLOYE" | translate}}
+                  <p-sortIcon [field]="'prenom'" ariaLabel="Activate to sort"
+                              ariaLabelAsc="Activate to sort in ascending order"
+                              ariaLabelDesc="Activate to sort in descending order">
+                  </p-sortIcon>
+                </div>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template let-employe let-employeIndex="rowIndex" pTemplate="frozenbody">
+            <tr class="day-hour-table-row">
+              <td #employeeHeader>
+                <ng-container>
+                  <div (click)="showPopUp($event, add_popover)"
+                       class="d-flex justify-content-start ml-2"
+                       id="PLANNING_addPointage">
+                    <div class="name-employee ml-2">
+                      <div class="empl-prenom">{{employe?.prenom}}</div>
+                      <div class="badge-planning">{{employe?.badge?.code}}</div>
+                      <div class="empl-nom">{{employe?.nom.length > 9 ? employe?.nom.slice(0, 9) + '..' : employe?.nom}}</div>
+                    </div>
+                  </div>
+                  <p-overlayPanel #add_popover
+                                  (onHide)="pointageToBeCreated.error = null"
+                                  [appendTo]="'body'"
+                                  [dismissable]="true">
+                    <rhis-add-pointage-form
+                      (add)="add(employe, employeIndex, $event, pointageToBeCreated, add_popover)"
+                      (hidePopUp)="add_popover?.hide()"
+                      *ngIf="add_popover.overlayVisible"
+                      [isCreation]="true"
+                      [pointage]="pointageToBeCreated"
+                      [typePointages]="typePointages">
+                    </rhis-add-pointage-form>
+
+                  </p-overlayPanel>
+                </ng-container>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template let-columns pTemplate="header">
+            <tr>
+              <th *ngFor="let col of columns; trackBy: trackCol">
+                {{col.title}}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template let-columns="columns" let-employe let-employeIndex="rowIndex" pTemplate="body">
+            <tr #tableRow [pSelectableRow]="employe" class="day-hour-table-row">
+              <td *ngFor="let col of columns; let l = last; trackBy: trackHeader.bind(this, employeIndex)"
+                  [ngClass]="{'last-half-hour': l && endHour != ''}">
+                <ng-container *ngFor="let shift of employe?.shifts; trackBy: trackItem">
+                  <div *ngIf="getDisplayCondition | memoize: [shift, col]" class="d-block">
+                    <!-- plannif and pointage div -->
+                    <div>
+                      <rhis-hours-div *ngIf="shift?.idShift !== null"
+                                      [id]="employe?.idEmploye"
+                                      [isPlanif]="true"
+                                      [shift]="shift"
+                                      [widthOfMinute]="widthOfMinute"></rhis-hours-div>
+                    </div>
+                    <div *ngIf="shift?.pointages" class="d-flex">
+                      <!-- Display pointages -->
+                      <ng-container *ngFor="let pointage of shift?.pointages; let i = index; trackBy: trackItem">
+                        <ng-container *ngTemplateOutlet="pointingDetails;
+                     context: {index: i, pointageAbsence: {shift: {id: shift?.idShift}, data: pointage, shown : false, error: false},
+                     partitions: pointage?.idFront ? (getAssociatedShifts | memoize: dateService: pointage: shift: employe?.shifts: employe) : null,
+                      shift: shift, pointage: pointage, employe: employe, employeIndex: employeIndex}">
+                        </ng-container>
+                      </ng-container>
+                    </div>
+                  </div>
+                </ng-container>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <ng-template #pointingDetails
+                     let-employe="employe"
+                     let-employeIndex="employeIndex"
+                     let-i="index"
+                     let-intersection="intersection"
+                     let-partitions="partitions"
+                     let-pointage="pointage"
+                     let-shift="shift">
+          <div (click)="showPopUp($event, popover, pointage)"
+               [style.margin-left.px]="getMarginLeft(shift, i, widthOfMinute, employe, dateService)"
+               class="fitContent">
+            <rhis-hours-div
+              (clickedAbsence)="clickedAbsence($event, shift?.totalHeure, shift?.heureDebut, i)"
+              [employe]="employe"
+              [id]="employe?.idEmploye"
+              [intersection]="intersection"
+              [isPlanif]="false"
+              [partitions]="partitions"
+              [pointage]="getPointage | memoize: pointage : shift: i: employe: widthOfMinute: dateService"
+              [shift]="shift"
+              [widthOfMinute]="widthOfMinute">
+            </rhis-hours-div>
+          </div>
+
+          <p-overlayPanel #popover
+                          (onHide)="pointage.error = null"
+                          [appendTo]="'body'"
+                          [dismissable]="true"
+                          [style]="{ 'margin-left': limitAbsence ?  marginLeftValueNew : ((pointage?.arrives > 0) ? (((pointage?.tempsPointes) +'px')) : ((pointage?.tempsPointes + pointage?.arrives) + 'px')) }">
+            <rhis-add-pointage-form
+              (delete)="delete(pointage, employe, employeIndex)"
+              (hidePopUp)="popover?.hide()"
+              (update)="update($event, pointage, employe, employeIndex, popover)"
+              *ngIf="popover.overlayVisible && !limitAbsence"
+              [pointage]="pointage"
+              [typePointages]="typePointages">
+            </rhis-add-pointage-form>
+            <div *ngIf="limitAbsence" class="limite-absence-bloc-btn">
+              <button (click)="printVoucher(employe, pointage, popover)"
+                      class="btn button-commun-pointeuse blue-background imprimer-btn-action"
+                      id="POINTAGE_print-btn"
+                      type="button">
+                <span>{{printButtonText}}</span>
+              </button>
+            </div>
+          </p-overlayPanel>
+        </ng-template>
+      </div>
+      <ng-container #realTime></ng-container>
+      <ng-template #realTimeTemplate>
+        <div [hidden]="!hiddenLineRealTime"
+             [style.height.px]="heightTablePointed"
+             [style.max-height.px]="maxHeightTablePointed"
+             [style.left.px]="leftReal"
+             class="block-real-time">
+          <div class="circle">
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+<div *ngIf="isEntryPointing> -1" style="margin: 15px;">
+  <div *ngIf="isEntryPointing===1" class="entry-class">
+    <button style="margin-left: 10px; width: 55%!important;" (click)="pointing(true); clicked = true;" [disabled]="clicked"
+            class="btn button-commun-pointeuse blue-background planning-btn-action"
+            id="PLANNING_pointage-btn"
+            type="button">
+      <span>{{ 'POINTAGE.ENTRY' | translate }}</span>
+    </button>
+
+    <div class="dropdown-class">
+      <p-dropdown [(ngModel)]="choosenTypePointage"
+                  [options]="typePointages"
+                  [placeholder]="choosenTypePointage?.libelle"
+                  dataKey="libelle"
+                  id="PLANNING_pointageChoose-dropdown"
+                  optionLabel="libelle"
+      ></p-dropdown>
+    </div>
+  </div>
+  <div class="entry-class">
+    <button (click)="pointing(false); clicked = true;" *ngIf="isEntryPointing===0" [disabled]="clicked"
+            class="btn button-commun-pointeuse blue-background planning-btn-action" type="button">
+      <span>{{'POINTAGE.EXIT'| translate}}</span>
+    </button>
+  </div>
+</div>
+<rhis-pop-up (closeEvent)="closePopup()" [height]="popUpStyle?.height"
+             [showPopUp]="showPopupContrainteSocial"
+             [title]="'PLANNING_PAGE_PRINCIPALE.POPUP_ANOMALIE_TITLE' | translate" style="width: auto">
+  <div class="table-list bg-gris-avec-border perso-table-popup-rhis table-anomalie">
+    <p-table [value]="verificationResult">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="popup-employe-width" scope="col"> {{'PLANNING_PAGE_PRINCIPALE.EMPLOYE' | translate}}
+          </th>
+          <th class="popup-anomalie-width last-td" scope="col">{{'PLANNING_PAGE_PRINCIPALE.ANOMALIE' | translate}}</th>
+        </tr>
+      </ng-template>
+      <ng-template let-messageVerification pTemplate="body">
+        <tr *ngIf="!messageVerification?.isRespected" [pSelectableRow]="messageVerification">
+          <td class="popup-employe-width">
+            {{this.employeeCoordiantions?.selectedEmployee?.nom}}&nbsp;{{this.employeeCoordiantions?.selectedEmployee?.prenom}}
+          </td>
+          <td class="popup-anomalie-width">
+            {{messageVerification?.contrainteMessage}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <div class="d-flex justify-content-between">
+      <button (click)="closePopup()"
+              class="btn button-popup-rhis orange-background color-btn-white-rhis btn-save-rhis"
+              type="button">
+        <span>{{'PLANNING_PAGE_PRINCIPALE.CANCEL_BUTTON' | translate}}</span>
+      </button>
+      <button (click)="terminateOperation()"
+              class="btn button-popup-rhis orange-background color-btn-white-rhis btn-save-rhis">
+        <span>{{'PLANNING_PAGE_PRINCIPALE.CONFIRM_BUTTON' | translate}}</span>
+      </button>
+    </div>
+  </div>
+</rhis-pop-up>
+
+<!--suppress TypeScriptValidateTypes -->
+<rhis-pop-up (closeEvent)="showVoucherPdf = false"
+             [height]="700"
+             [showPopUp]="showVoucherPdf">
+  <div class="rhis-container voucher" style="margin: 0 auto;">
+    <div id="voucher">
+      <br>
+      <br>
+      <div class="row flex-grid">
+        <div>{{actualTime}}</div>
+        <div>{{selectedEmployee?.nom}}  {{selectedEmployee?.prenom}}</div>
+        <div>{{actualDate}}</div>
+      </div>
+      <hr>
+      <div class="row flex-grid-title">
+        <div class="bon-title">{{bonTitle}}</div>
+      </div>
+      <hr>
+      <div class="row flex-grid-content">
+        <div>{{"POINTAGE.CODE_SALARIE" | translate}}  : {{selectedEmployee?.matricule}}</div>
+        <div>{{"POINTAGE.TEXT1" | translate}}, {{selectedEmployee?.nom}}  {{selectedEmployee?.prenom}} {{bonContent}}
+          :
+        </div>
+        <div>{{"POINTAGE.DE" | translate}} {{limitAbsence?.heureDebut | slice:0:5}}   {{"POINTAGE.A" | translate}}  {{limitAbsence?.heureFin | slice:0:5}} {{"POINTAGE.LE" | translate}} {{limitAbsence?.dateJournee | date: 'dd-MM-yyyy'}}</div>
+        <div>{{"POINTAGE.TEXT3" | translate}} : ---------------------------------</div>
+      </div>
+      <hr>
+      <div class="row flex-grid">
+        <div>{{"POINTAGE.SIGNATURE" | translate}} :</div>
+        <div>{{"POINTAGE.EQUIPIER" | translate}} </div>
+        <div>{{"POINTAGE.MANAGER" | translate}}</div>
+      </div>
+      <div class="row flex-grid">
+        <div> ----------------</div>
+        <div> ----------------</div>
+        <div> ---------------</div>
+      </div>
+    </div>
+  </div>
+</rhis-pop-up>
+
+<p-toast [style]="{marginTop: '80px'}"></p-toast>

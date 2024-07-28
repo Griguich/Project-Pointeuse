@@ -1,0 +1,94 @@
+<!-- Bloc de Message texte -->
+<div *ngIf="messageTexte" class="block__contenu-page">
+  <div class="block__contenu-page--top">
+    <h2 class="block__contenu-page--top-titre">{{'MESSAGE.TEXTE' | translate}}</h2>
+    <button class="btn button-commun-pointeuse blue-background mb-4" type="button" (click)="SaveMessage()"
+            id="EMPLOYEE_messageT-send">
+      <span>{{'MESSAGE.ENVOI' | translate}}</span>
+    </button>
+  </div>
+
+  <div class="form-group block__contenu-page-text-area"
+       [ngClass]="displayClavier  ? 'display__clavier' : 'display__clavier--not'">
+    <textarea class="form-control message__text-area mb-4"
+              [rows]="10"
+              autoResize="autoResize"
+              inputmode='none'
+              pInputTextarea
+              value="{{textAreaValue}}"
+              [placeholder]='placeholderMessage'
+              [(ngModel)]="textAreaValue"
+              (click)=" displayClavierMessage()"
+              id="EMPLOYEE_messageT-textarea">
+    </textarea>
+    <div class="simple-keyboard"></div>
+  </div>
+</div>
+
+<!-- Bloc de Message bandrole -->
+<div *ngIf="messageBandeRole" class="block__contenu-page">
+  <div class="block__contenu-page--top">
+    <h2 class="block__contenu-page--top-titre">{{'MESSAGE.BANDROLE' | translate}}</h2>
+    <button class="btn button-commun-pointeuse blue-background mb-4" type="button" (click)="SaveMessage()"
+            id="EMPLOYEE_messageBR-send">
+      <span>{{'MESSAGE.ENVOI' | translate}}</span>
+    </button>
+  </div>
+
+  <div class="form-group block__contenu-page-text-area" *ngIf="isMobile===false" class="simple-keyboard"
+       [ngClass]="(displayClavier && !isMobile) ? 'display__clavier' : 'display__clavier--not'">
+    <textarea class="form-control message__text-area"
+              [rows]="10"
+              autoResize="autoResize"
+              pInputTextarea
+              value={{textAreaValue}}
+              [placeholder]='placeholderMessage'
+              (click)="displayClavierMessage()"
+              id="EMPLOYEE_messageBR-textarea">
+    </textarea>
+    <div class="simple-keyboard" style="position: relative;"></div>
+  </div>
+</div>
+
+<!-- Bloc de Message Audio -->
+
+<div *ngIf="messageAudio" class="block__contenu-page">
+  <div class="block__contenu-page--top">
+    <h2 class="block__contenu-page--top-titre">{{'MESSAGE.AUDIO' | translate}}</h2>
+    <button class="btn button-commun-pointeuse blue-background mb-4" type="button" (click)="SaveMessage()"
+            id="EMPLOYEE_messageA-send">
+      <span>{{'MESSAGE.ENVOI' | translate}}</span>
+    </button>
+  </div>
+  <div class="block-audio">
+    <div class="block-audio__bloc-enregistrement--avant" *ngIf="!blobUrl">
+      <h6 class="block-audio--titre">{{'MESSAGE.TITLE_MESSAGE_AVANT_ENREGISTREMENT' | translate}}</h6>
+      <div class="button-start" *ngIf="!isRecording" (click)="startRecording()"
+           id="EMPLOYEE_messageA-start">
+        <div class="button-start__circle">
+          <a class="button-start__circle--link">{{'MESSAGE.START_RECORDING' | translate}}</a>
+        </div>
+      </div>
+      <div class="button-start" *ngIf="isRecording" (click)="stopRecording()"
+           id="EMPLOYEE_messageA-stop">
+        <div class="button-start__circle">
+          <a class="button-start__circle--link">{{'MESSAGE.STOP_RECORDING' | translate}}</a>
+        </div>
+      </div>
+
+      <div class="block-audio__time" *ngIf="isRecording"> {{recordedTime}}</div>
+    </div>
+
+    <div class="block-audio__bloc-enregistrement" *ngIf="!isRecording && blobUrl">
+      <h6 class="block-audio--titre">{{'MESSAGE.TITLE_MESSAGE_A_ENVOYER' | translate}}</h6>
+      <audio controls>
+        <source [src]="blobUrl" type="audio/webm">
+      </audio>
+      <button class="btn button-cancel" type="button" (click)="clearRecordedData()"
+              id="EMPLOYEE_messageA-cancel">
+        <span>{{'MESSAGE.CLEAR_RECORDING' | translate}}</span>
+      </button>
+    </div>
+  </div>
+</div>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>

@@ -1,0 +1,415 @@
+@import '../../styles/generique';
+
+div[class^="display__clavier"] {
+  width: 100%;
+}
+
+.overlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+:host ::ng-deep .p-button {
+  margin: 0 .5rem 0 0;
+  min-width: 10rem;
+}
+
+.classbtn {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+p {
+  margin: 0;
+}
+
+.confirmation-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep {
+  .p-dialog .p-button {
+    min-width: 6rem;
+  }
+}
+
+.center-div {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.sliderStyle {
+  margin-top: 10px;
+  width: 78%;
+  font-size: 2.5rem;
+}
+
+.volume {
+  padding-left: 20px;
+}
+
+.card.card-login {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border-radius: 15px;
+  box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+  border-width: 0;
+  transition: all .2s;
+  padding: 15px 21px 15px 21px;
+}
+
+.title-technecien {
+  margin: 0 auto;
+  height: 28px;
+  text-align: center;
+  @media screen and (max-width: 991px) {
+    height: 40px;
+  }
+
+  span {
+    color: #414141;
+    font-family: "TT Wellingtons Medium";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 28px;
+    margin: 0 0 14px 0;
+    text-align: center;
+    @media screen and (max-width: 991px) {
+      font-size: 12px;
+    }
+  }
+
+  img {
+    max-width: 30px;
+    @media screen and (max-width: 991px) {
+      max-width: 26px;
+    }
+  }
+}
+
+.button-popup-rhis.btn.btn-save-rhis.btn-technicien {
+  width: 130px;
+  margin: 0 auto;
+  @media screen and (max-width: 991px) {
+    width: 120px;
+  }
+}
+
+.block-volume {
+  margin-top: 15px;
+
+  .pi {
+    font-size: 3.25em;
+    margin-top: -22px;
+  }
+}
+
+.card.card-login.first-block {
+  min-height: 128px;
+}
+
+.block-button {
+  .card.card-login {
+    margin: 0 auto;
+    text-align: center;
+    height: 120px;
+    @media screen and (max-width: 991px) {
+      height: 108px;
+    }
+  }
+
+  .title {
+    color: #414141;
+    font-family: "TT Wellingtons Medium";
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 5px;
+    height: 30px;
+    @media screen and (max-width: 991px) {
+      font-size: 11px;
+      height: 38px;
+    }
+  }
+
+  .info {
+    color: #2ecc71;
+    font-family: "TT Wellingtons Medium";
+    font-size: 26px;
+    font-weight: bolder;
+    padding-top: 15px;
+    @media screen and (max-width: 991px) {
+      font-size: 20px;
+    }
+  }
+}
+
+h3.title-global {
+  color: #6c757d;
+  font-family: "TT Wellingtons Medium", sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-align: center;
+  @media screen and (max-width: 991px) {
+    font-size: 15px;
+  }
+}
+
+.block-center {
+  .card.card-login {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .title {
+    color: #414141;
+    font-family: "TT Wellingtons Medium";
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 5px;
+    height: 30px;
+    @media screen and (max-width: 991px) {
+      font-size: 11px;
+    }
+  }
+
+  .info {
+    color: #414141;
+    font-family: "TT Wellingtons Medium";
+    font-size: 16px;
+    font-weight: bolder;
+    padding-top: 15px;
+    @media screen and (max-width: 991px) {
+      font-size: 14px;
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+:host ::ng-deep .p-button {
+  margin: 0 .5rem 0 0;
+  min-width: 10rem;
+}
+
+.classbtn {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+p {
+  margin: 0;
+}
+
+.confirmation-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep {
+  .p-dialog .p-button {
+    min-width: 6rem;
+  }
+}
+
+.center-div {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.sliderStyle {
+  width: 78%;
+  font-size: 2.5rem;
+}
+
+.card.card-login {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border-radius: 10px;
+  box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+  border-width: 0;
+  transition: all .2s;
+  padding: 15px 21px 15px 21px;
+}
+
+.title-technecien {
+  margin: 0 auto;
+  height: 28px;
+  text-align: center;
+  @media screen and (max-width: 991px) {
+    height: 40px;
+  }
+
+  span {
+    color: #414141;
+    font-family: "TT Wellingtons Medium";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 28px;
+    margin: 0 0 14px 0;
+    text-align: center;
+    @media screen and (max-width: 991px) {
+      font-size: 12px;
+    }
+  }
+
+  img {
+    max-width: 30px;
+    @media screen and (max-width: 991px) {
+      max-width: 26px;
+    }
+  }
+}
+
+.button-popup-rhis.btn.btn-save-rhis.btn-technicien {
+  width: 130px;
+  margin: 0 auto;
+  @media screen and (max-width: 991px) {
+    width: 120px;
+  }
+}
+
+.block-volume {
+  margin-top: 15px;
+
+  .pi {
+    font-size: 3.25em;
+    margin-top: -22px;
+  }
+}
+
+.block-button {
+  .card.card-login {
+    margin: 0 auto;
+    text-align: center;
+    height: 120px;
+    @media screen and (max-width: 991px) {
+      height: 108px;
+    }
+  }
+
+  .title {
+    color: #414141;
+    font-family: "TT Wellingtons Medium";
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 5px;
+    height: 30px;
+    @media screen and (max-width: 991px) {
+      font-size: 11px;
+      height: 38px;
+    }
+  }
+
+  .info {
+    color: #2ecc71;
+    font-family: "TT Wellingtons Medium";
+    font-size: 26px;
+    font-weight: bolder;
+    padding-top: 15px;
+    @media screen and (max-width: 991px) {
+      font-size: 20px;
+    }
+  }
+}
+
+h3.title-global {
+  color: #6c757d;
+  font-family: "TT Wellingtons Medium", sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-align: center;
+  @media screen and (max-width: 991px) {
+    font-size: 15px;
+  }
+}
+
+.block-center {
+  .card.card-login {
+    margin: 0 auto;
+    text-align: center;
+    height: 120px;
+  }
+
+  .title {
+    color: #414141;
+    font-family: "TT Wellingtons Medium";
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 5px;
+    height: 30px;
+    @media screen and (max-width: 991px) {
+      font-size: 11px;
+    }
+  }
+
+  .info {
+    color: #414141;
+    font-family: "TT Wellingtons Medium";
+    font-size: 16px;
+    font-weight: bolder;
+    padding-top: 15px;
+    @media screen and (max-width: 991px) {
+      font-size: 14px;
+    }
+  }
+}
+:host ::ng-deep {
+  .associate-popup {
+    .ui-confirmdialog-rejectbutton.ui-button.ui-state-default.ui-button-text-icon-left {
+      display: none;
+    }
+    .ui-confirmdialog-acceptbutton.ui-button.ui-state-default.ui-button-text-icon-left {
+      margin-left: 50% !important;
+      transform: translate(-50%, 0%);
+      float: left;
+      .ui-button-icon-left {
+        display: none;
+      }
+      .ui-button-text {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.btn.button-popup-ASS {
+  height: 55px;
+}

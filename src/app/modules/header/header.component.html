@@ -1,0 +1,138 @@
+<header class="header">
+  <div class="header__logo">
+    <img src="assets/icons/header/Logo_MyRHIS.svg" class="rotate linear infinite">
+  </div>
+  <div class="header__information row">
+    <div class="col-4 align-items-center pl-0">
+      <h1 class="header__information--nom-restaurant"
+          id="RESTAURANT_nom">
+        {{ nameRestaurant }}
+      </h1>
+      <span *ngIf="!isOnline"
+            class="offline-libel ml-4">{{'PLANNING_PAGE_PRINCIPALE.OFFLINE_LIBEL' |translate}}</span>
+    </div>
+    <div class="header__information--date col-4">
+      <div id="RESTAURANT_HeureActuel">{{ sessionJournee }}</div>
+      <div id="RESTAURANT_DateJour">{{ sessionDateJournee | date: 'dd-MM-yyyy' }}</div>
+    </div>
+    <div class="col-4 align-items-stretch " style="height: 64px;">
+      <div class="float-right">
+        <div class="header__information--user">
+          <div class="header__information--user-nom pr-1 d-flex align-items-center"
+               id="RESTAURANT_nameUser">
+            <div *ngIf="personalizedAccess | userPermission: ALERTES:isManagerMenu ">
+              <span (click)="goToAnomalie()"
+                    *ngIf="nbAnomalies !== 0"
+                    class="header-icons anomalie"
+                    id="RESTAURANT_anomalieAlerte">
+                <img src="assets/icons/accueil/Bar_Header/ico_Alertes.svg">
+              </span>
+              <span (click)="goToAnomalie()"
+                    *ngIf="nbAnomalies === 0"
+                    class="header-icons anomalie"
+                    id="RESTAURANT_emptyAlarme">
+                <img src="assets/icons/accueil/Bar_Header/empty-alarm-bell.svg">
+              </span>
+            </div>
+            <div class="sep"></div>
+            <div *ngIf="codeBadge !== '0'" class="pr-1">{{ nameUser }}</div>
+            <div *ngIf="codeBadge === '0'" class="pr-1">{{'HEADER.ADMIN' | translate}} </div>
+            <div class="badge mr-1">({{ codeBadge }})</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--<marquee class="banderole-message-rhis">{{bandroleMessage}}</marquee>-->
+</header>
+<rhis-pop-up (closeEvent)="closePopup()"
+             [height]="popUpStyle?.height"
+             [showPopUp]="popupSynchronisation"
+             [width]="popUpStyle?.width"
+             title="{{'POPUP_SYNCHRONISATION.TITLE' |translate}}">
+  <div *ngIf="!syncEnCours; else ProgressBar;">
+    <form [formGroup]="syncForm">
+      <div class="row">
+        <span class="modal-sync-title">{{'POPUP_SYNCHRONISATION.FORM_TITLE' | translate}}</span>
+      </div>
+      <br>
+      <div class="row synchro-timework style-synchro-generique">
+        <div class="col-5">
+          <div class="row" style="padding-top: 3px;">
+            <div class="col-3">
+              <p-checkbox binary="true" formControlName="syncPointages" id="RESTAURANT_synPointage-checkbox"
+                          name="syncPointages">
+              </p-checkbox>
+            </div>
+            <div class="col-9" style="padding-left: 7px">
+              <label
+                for="RESTAURANT_synPointage-checkbox">{{"POPUP_SYNCHRONISATION.SYNC_POINTAGES" | translate}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-7">
+          <p-calendar [locale]="calendarFr"
+                      [maxDate]="maxDate"
+                      [monthNavigator]="true" [showIcon]="true"
+                      dateFormat="dd/mm/yy" formControlName="dateJournee" id="dateJournee"
+                      inputId="icon"
+                      rhisStyleForm>
+          </p-calendar>
+        </div>
+      </div>
+      <div class="row style-synchro-generique">
+        <div class="col-1">
+          <p-checkbox name="syncPret" formControlName="syncPret" binary="true"></p-checkbox>
+        </div>
+        <div class="col-6">
+          <label>{{"PRET.TITLE" | translate}}</label>
+        </div>
+      </div>
+      <div class="row style-synchro-generique">
+        <div class="col-1">
+          <p-checkbox binary="true" formControlName="syncEmployes" id="RESTAURANT_synEmployee-checkbox"
+                      name="syncEmployes"></p-checkbox>
+        </div>
+        <div class="col-8">
+          <label for="RESTAURANT_synEmployee-checkbox">{{"POPUP_SYNCHRONISATION.SYNC_EMPLOYES" | translate}}
+            / {{"POPUP_SYNCHRONISATION.SYNC_CS" | translate}}</label>
+        </div>
+      </div>
+      <div class="row style-synchro-generique">
+        <div class="col-1">
+          <p-checkbox binary="true" formControlName="syncPlanning" id="RESTAURANT_synPlanning-checkbox"
+                      name="syncPlanning"></p-checkbox>
+        </div>
+        <div class="col-8">
+          <label for="RESTAURANT_synPlanning-checkbox">{{"POPUP_SYNCHRONISATION.SYNC_PLANNING" | translate}}</label>
+        </div>
+      </div>
+      <div class="row style-synchro-generique">
+        <div class="col-1">
+          <p-checkbox binary="true" formControlName="syncParam" id="RESTAURANT_synParam-checkbox"
+                      name="syncParam"></p-checkbox>
+        </div>
+        <div class="col-6">
+          <label for="RESTAURANT_synParam-checkbox">{{"POPUP_SYNCHRONISATION.SYNC_PARAM" | translate}}</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+          <button (click)="synchronize()"
+                  class="btn button-popup-rhis orange-background color-btn-white-rhis btn-save-rhis"
+                  id="RESTAURANT_synchro-btn"
+                  type="button">
+            <span>{{'POPUP_SYNCHRONISATION.SYNCHRONISER' | translate}}</span>
+          </button>
+        </div>
+        <div class="col-4"></div>
+
+      </div>
+    </form>
+  </div>
+  <ng-template #ProgressBar>
+    <p-progressBar [value]="value"></p-progressBar>
+  </ng-template>
+</rhis-pop-up>

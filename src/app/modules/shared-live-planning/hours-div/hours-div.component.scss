@@ -1,0 +1,80 @@
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+}
+
+.time {
+  color: #ffffff;
+  border-radius: 3px;
+  margin-bottom: 2px;
+  font-size: 10px;
+  z-index: 1;
+}
+
+.time-green {
+  color: #2DC76D !important;
+}
+
+.time-red {
+  color: #EA443D !important;
+}
+
+.time-orange {
+  color: #FF9B42 !important;
+}
+
+.red-block {
+  background-color: #e8000042;
+  border: 1px solid #EA443D;
+}
+
+.green-block {
+  border: 1pt solid #2DC76D;
+  background-color: #2DC76D42;
+}
+
+.yellow-block {
+  background-color: #ffac0042;
+  border: 1px solid #FF9B42;
+}
+
+.pointage-border {
+  border: 1pt solid #2DC76D;
+}
+
+.small-font {
+  font-size: 9px;
+}
+
+.small-shift-generic-inf-52, .small-pointage-inf-52 {
+  line-height: 9px;
+  padding-top: 2px;
+  max-height: 27px !important;
+}
+.shiftSign{
+  border-left: 5px solid #FF9B42;
+  border-right: 5px solid #FF9B42;
+}
+.shift-signe-texte {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  clip-path: polygon(0% 0%, 34% 0, 100% 50%, 34% 100%, 0% 100%);
+  width: 12px;
+  height: 10px;
+  span {
+    font-size: 6px;
+    font-weight: bold;
+    left: -2px;
+  }
+}
+.shiftSignTriangle{
+  background: #FF9B42;
+}
+
+.small-shift-generic-inf-30 {
+  line-height: 7px;
+  padding-top: 1px;
+  max-height: 25px !important;
+}

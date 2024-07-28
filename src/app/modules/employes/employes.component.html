@@ -1,0 +1,94 @@
+<div class="block__contenu-page">
+  <div class="block__contenu-page--top" (rhisHeightScrollableSection)="heightInterface = ($event + 'px')"
+       [offset]="230"
+       [ngClass]="displayClavier1  ? 'display__clavier' : 'display__clavier--not'">
+    <h2 class="block__contenu-page--top-titre">{{'POINTEUSE.EMPLOYEE' | translate}}</h2>
+    <div class="block-right-emp">
+      <div class="search">
+        <input id="EMP-search-input"
+               placeholder={{rechercheNomOrPrenom}}
+               type="text"
+               inputmode='none'
+               [(ngModel)]="searchText"
+               value="{{searchText}}"
+               (keyup)="applyFilter(this.searchText)"
+               (click)="displayClavierMessage1()"
+               pInputText>
+        <span id="EMP-search-click">
+            <img alt="" src="assets/icons/employes/ico_search_small.svg">
+          </span>
+      </div>
+      <div class="block__contenu-page--top-icons list-icons"
+           *ngIf="envoiMessageSelectedEmployee || envoiMessageSelectedEmployeeAll">
+        <div class="list-icons__icon-vocale" (click)="messageVocaleClicked()"
+             id="EMPLOYEE_vocalMessage">
+          <img src="assets/icons/employes/message-audio.png" alt="">
+        </div>
+        <div class="list-icons__icon-texte" (click)="messageTexteClicked()"
+             id="EMPLOYEE_texteMessage">
+          <img src="assets/icons/employes/message-texte.png" alt="">
+        </div>
+        <!--bandrole supprimé pour le moment-->
+        <!--      <div class="list-icons__icon-bandrole" (click)="messageBanderoleClicked()">
+                <img src="assets/icons/employes/message-bandrole.png" alt="">
+         </div>-->
+
+      </div>
+    </div>
+    <div class="simple-keyboard"></div>
+  </div>
+  <div class="block__contenu-page-table">
+    <div class="table-list table-list__last-child--center">
+      <p-table [value]="listEmployees"
+               selectionMode="multiple"
+               *ngIf="listEmployees?.length !== 0; else messageTemplate"
+               [scrollable]="true" [scrollHeight]="heightInterface">
+        <ng-template pTemplate="header" let-columns>
+          <tr class="header-row">
+            <th>
+              <p-checkbox name="groupname"
+                          binary="true"
+                          [ngModel]="isAllChecked()"
+                          (onChange)="checkAllEmployees()"
+                          value="val1"
+                          id="EMPLOYEE_allEmp-select">
+              </p-checkbox>
+            </th>
+            <th *ngFor="let col of header">
+              {{col?.field}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-employe let-i="rowIndex">
+          <tr class="table-row">
+            <td>
+              <p-checkbox name="groupname"
+                          binary="true"
+                          (onChange)="getCheckedEmpoye(employe,i)"
+                          [ngModel]="employe.isSelected"
+                          value="val1"
+                          id="EMPLOYEE_oneEmp-select">
+              </p-checkbox>
+            </td>
+            <td>
+              <div>{{employe?.badge?.code}}</div>
+            </td>
+            <td>
+              <div>{{employe?.nom}}</div>
+            </td>
+            <td>
+              <div>{{employe?.prenom}}</div>
+            </td>
+            <td>
+              <div>{{employe?.numTelephone}}</div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+    </div>
+    <ng-template #messageTemplate>
+      <p-message severity="info" class="message__info-general" [text]='aucunMessage'></p-message>
+    </ng-template>
+  </div>
+</div>

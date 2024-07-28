@@ -1,0 +1,26 @@
+<p-dialog (onHide)="closePopUp()"
+          [(visible)]="showPopUp"
+          [appendTo]="'body'"
+          [dismissableMask]="true"
+          [maximizable]="false"
+          [modal]="true"
+          [resizable]="false"
+          [responsive]="true"
+          [showHeader]="false">
+  <div class="pop-up-container-rhis pop-up-style-generique">
+    <div class="modal-header">
+      <h5 class="modal-title">{{title}}</h5>
+      <div class="close-btn-modal-rhis">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closePopUp()">
+          <img src="assets/icons/pointage/Btn_Close_Beige.svg" alt="">
+        </button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div [style.width.px]="width"
+           class="content pop-up-content align-popup-content">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</p-dialog>

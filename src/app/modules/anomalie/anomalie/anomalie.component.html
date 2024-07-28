@@ -1,0 +1,74 @@
+<div class="block__contenu-page table-anomalie-aucun">
+  <div class="block__contenu-page--top" (rhisHeightScrollableSection)="heightInterface = ($event + 'px')"
+       [offset]="220">
+    <h2 class="block__contenu-page--top-titre">{{'ANOMALIE.DATE_ANOMALIE' | translate}}  {{title}}</h2>
+  </div>
+  <div class="block__contenu-page-table">
+    <div class="table-list table-list__last-child--center">
+      <p-table [value]="listAnomalie"
+               selectionMode="multiple"
+               *ngIf="listAnomalie?.length !== 0; else messageTemplate"
+               [scrollable]="true" [scrollHeight]="heightInterface">
+        <ng-template pTemplate="header" let-columns>
+          <tr class="header-row">
+            <th *ngFor="let col of header">
+              {{col?.field}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-anomalie let-i="rowIndex">
+          <tr class="table-row" (click)="showPopupValidateAnomalie(anomalie)">
+
+            <td>
+              <div>{{anomalie?.nomEmploye}} {{anomalie?.prenomEmploye}} {{anomalie?.badgeEmployee}} </div>
+            </td>
+            <td>
+              <div>{{anomalie?.libelleAnomalie}}</div>
+            </td>
+            <td>
+              <div>{{anomalie?.valeurContrainte}}</div>
+            </td>
+            <td>
+              <i *ngIf="anomalie?.valide" class="pi pi-check"></i>
+
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+    </div>
+    <ng-template #messageTemplate>
+      <p-message severity="info" class="message__info-general aucun-anomalie" [text]='aucunMessage'></p-message>
+    </ng-template>
+  </div>
+</div>
+<rhis-pop-up
+  (closeEvent)="popupValidateAnomalie = false"
+  [showPopUp]="popupValidateAnomalie"
+  title=" {{'ANOMALIE.VALIDATE' |translate}} ">
+  <div>
+    <div>
+      <h5>
+        {{textOfValidateAnomalie}}
+      </h5>
+    </div>
+    <div class="row justify-content-around align-content-center">
+      <div>
+        <button (click)=validateAnomalie()
+                class="btn button-popup-rhis orange-background color-btn-white-rhis btn-save-rhis"
+                type="button">
+          <span>{{'ANOMALIE.OUI' | translate}}</span>
+        </button>
+      </div>
+      <div>
+        <button (click)=closePopup()
+                class="btn button-popup-rhis orange-background color-btn-white-rhis btn-save-rhis"
+                type="button">
+          <span>{{'ANOMALIE.NON' | translate}}</span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</rhis-pop-up>

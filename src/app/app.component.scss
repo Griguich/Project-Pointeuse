@@ -1,0 +1,27 @@
+.pointeuse-generalise {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+.pointeuse-generalise.login {
+  background: #F7F7F7;
+}
+
+.banderole-message-rhis {
+  color: #575045;
+  padding: 30px 15px;
+  position: absolute;
+  bottom: 20px;
+  font-size: 28px;
+  box-shadow: 0 .25em .5em #CCC, inset 0 0 1em .25em #FF9B42;
+  background: rgba(255, 155, 66, 0.4);
+  left: -74px;
+  text-transform: uppercase;
+  width: calc(100% + 74px);
+  height: calc(100% + 74px);
+}
+.rhis-header-container{
+  height: 78px;
+  width: 100%;
+}

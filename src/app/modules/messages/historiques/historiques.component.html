@@ -1,0 +1,37 @@
+<div class="block__contenu-page">
+  <div class="block__contenu-page--top">
+    <h2 class="block__contenu-page--top-titre">{{'HISTORIQUE.TITLE' | translate}}</h2>
+  </div>
+  <div class="block__contenu-page-table">
+    <div class="table-list table-list__last-child--center historique">
+      <p-table [value]="messages">
+        <ng-template pTemplate="header" let-columns>
+          <tr class="header-row">
+            <th>{{'HISTORIQUE.DATE' | translate}}</th>
+            <th>{{'HISTORIQUE.CREATEUR' | translate}}</th>
+            <th>{{'HISTORIQUE.TYPE_MESSAGE' | translate}}</th>
+            <th>{{'HISTORIQUE.MESSAGE' | translate}}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-message let-i="rowIndex">
+          <tr class="table-row" (click)="showMessage(message)" id="EMPLOYEE-message">
+            <td>{{message?.dateCreation | date: 'dd/MM/yyyy hh:mm'}}</td>
+            <td>{{message?.fullNameMessageOwner}}</td>
+            <td>{{message?.typeMessage}}</td>
+            <td *ngIf="message?.contenuMessage.length > 20">{{message?.contenuMessage.substring(0,20) + '...'}}</td>
+            <td *ngIf="message?.contenuMessage.length <= 19">{{message?.contenuMessage}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+<rhis-pop-up
+  (closeEvent)="closeShowMessagePopUp()"
+  [showPopUp]="showMessagePopUp"
+  [title]=showMessageTitle>
+  <app-message-display *ngIf="showMessagePopUp"
+                       [selectedMessage]="selectedMessage">
+  </app-message-display>
+</rhis-pop-up>

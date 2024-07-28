@@ -1,0 +1,9 @@
+<div *ngIf="selectedMessage?.typeMessage === 'Text'">
+  <p>{{selectedMessage?.contenuMessage}}</p>
+</div>
+<div *ngIf="selectedMessage?.typeMessage === 'Audio'">
+  <audio controls id="EMPLOYEE_audio-msg">
+    <source [src]="messageAudio" type="audio/webm">
+  </audio>
+</div>
+

@@ -1,0 +1,5 @@
+export enum RapportContrat {
+  CONTRAT = 'CONTRAT',
+  AVENANT = 'AVENANT',
+  AVENANT_CONTRAT = 'AVENANT_CONTRAT'
+}

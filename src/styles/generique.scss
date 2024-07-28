@@ -1,0 +1,392 @@
+@import 'color';
+@import 'base';
+@import "mixin";
+
+.row.row--without-margin {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.content-pointeuse--layout {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+  height: calc(100% - 78px);
+}
+
+.content-pointeuse--composant {
+  font-family: "TT Wellingtons Medium", sans-serif;
+  width: calc(100% - 120px);
+  margin-top: 10px;
+  margin-left: 120px;
+  margin-right: 10px;
+  @media screen and (max-width: 991px) {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+  }
+}
+
+.p-fieldset {
+  text-decoration-color: $color-blue;
+}
+
+.textalign {
+  text-align: start;
+  text-decoration-color: $color-blue;
+}
+
+.btns {
+  display: flex;
+  align-content: center;
+  justify-content: space-evenly;
+  align-items: baseline;
+  flex-direction: row-reverse;
+}
+
+.btn.button__auth--block-all {
+  @include button__generique--color($color-blue, 5px);
+  width: 100%;
+  padding: 15px 0;
+  border-radius: 10px;
+}
+
+.btnAnomalie {
+  background-color: #FF9B42;
+  border-radius: 5px;
+  border-color: #7a7a7a;
+  width: auto;
+  padding: 5px;
+
+}
+
+.block__contenu-page {
+  height: 100%;
+  background: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: #ccc 0 0 16px;
+  position: relative;
+
+  &--top {
+    @include block-center__space-between;
+    margin-bottom: 0;
+
+    &-titre {
+      color: #414141;
+      font-family: "TT Wellingtons Medium", sans-serif;
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 50px;
+      @media screen and (max-width: 991px) {
+        font-size: 24px;
+        line-height: 30px;
+      }
+    }
+  }
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/******************* TABLE STYLE WITH BACKGROUND WHITE WITHOUT BORDER **************************/
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.table-list {
+  p-table {
+    .ui-table {
+      table {
+        border-collapse: separate;
+        border-spacing: 0 5px;
+
+        .ui-table-thead > tr {
+          font-family: "TT Wellingtons Light", sans-serif;
+
+          > th {
+            color: $table__color--th-gris;
+            border: none;
+            padding: 0 0 0 15px;
+            font-weight: 500;
+            background-color: transparent;
+            text-align: left;
+            font-size: 14px;
+            line-height: 14px;
+            @media screen and (max-width: 991px) {
+              font-size: 13px;
+            }
+
+            &:last-child {
+              text-align: left;
+            }
+
+            &::first-letter {
+              text-transform: uppercase;
+            }
+
+            &:hover {
+              background: none;
+            }
+          }
+        }
+
+        .ui-table-tbody > tr {
+          font-family: "TT Wellingtons Medium", sans-serif;
+          cursor: pointer;
+          font-size: 14px;
+          color: $table__color--td-gris;
+          background-color: $table__color--background-gris !important;
+          text-align: center;
+          @media screen and (max-width: 991px) {
+            font-size: 13px;
+          }
+          @media screen and (max-width: 767px) {
+            font-size: 12px;
+          }
+
+          &:hover {
+            background-color: $table__color--td-hover !important;
+            color: $table__color--td-gris--hover;
+          }
+
+          > td {
+            border: none;
+            text-align: left;
+            font-weight: 500;
+            line-height: 20px;
+            padding: 10px 0 10px 15px;
+            vertical-align: middle;
+            border-top: 1px solid #bbb;
+            border-bottom: 1px solid #bbb;
+            @media screen and (max-width: 991px) {
+              padding: 14px;
+            }
+
+            &:first-child {
+              border-left: 1px solid #bbb;
+              @include border-radius__generique(8px, 0, 0, 8px);
+              width: 50px;
+              overflow: hidden;
+            }
+
+            &:nth-child(2) {
+              width: 70px;
+            }
+
+            &:last-child {
+              border-right: 1px solid #bbb;
+              @include border-radius__generique(0, 8px, 8px, 0);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.table-list.historique p-table .ui-table table .ui-table-tbody > tr > td {
+  padding: 10px 0 10px 15px;
+}
+
+.table-list.table-list__last-child--center.historique p-table .ui-table table .ui-table-thead > tr > th:last-child {
+  text-align: left;
+}
+
+.table-list #vue-planning p-table .ui-table table .ui-table-tbody > tr > td {
+  text-align: center;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/********************************** TABLE STYLE LAST TD CENTER *********************************/
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.table-list.table-list__last-child--center {
+  p-table {
+    .ui-table {
+      table {
+        .ui-table-thead {
+          > tr {
+            > th:last-child {
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*************************************** STYLE MESSAGE INFO ************************************/
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.message__info-general {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  @include box-shadow__generigue;
+  @include border-radius__generique(5px, 5px, 5px, 5px);
+
+  .ui-message.ui-message-info {
+    background-color: $table__color--background-gris;
+    padding: 20px 15px;
+    font-family: "TT Wellingtons Medium", sans-serif;
+    font-size: 14px;
+    color: $text__color--base;
+    text-align: center;
+    width: 500px;
+    @include border-radius__generique(5px, 5px, 5px, 5px);
+
+    .ui-message-icon {
+      display: none;
+    }
+  }
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/************************************ Style Clavier Virtuel  ***********************************/
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+:host ::ng-deep {
+  .hg-theme-default {
+    background: $clavier__background;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: $color--base;
+    max-width: 700px;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 228px;
+
+    .hg-button {
+      background: #ddd;
+      color: $color--text;
+    }
+  }
+}
+
+.display__clavier1--not, .display__clavier2--not {
+  .simple-keyboard {
+    display: none;
+  }
+}
+
+.display__clavier1, .display__clavier2 {
+  .simple-keyboard {
+    display: block;
+  }
+}
+
+.display__clavier--not {
+  .simple-keyboard {
+    display: none;
+  }
+}
+
+.display__clavier {
+  .simple-keyboard {
+    display: block;
+  }
+}
+
+:host ::ng-deep {
+  .display__clavier1, .display__clavier2 {
+    .simple-keyboard.hg-theme-default {
+      top: 23%;
+    }
+  }
+
+  @media screen and (max-height: 620px) {
+    .display__clavier1 {
+      .simple-keyboard.hg-theme-default {
+        top: 76%;
+      }
+    }
+    .display__clavier2 {
+      .simple-keyboard.hg-theme-default {
+        top: 40%;
+      }
+    }
+  }
+}
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/********************************** Apply scroll height table  *********************************/
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.table-list .ui-table-scrollable-body {
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  padding-right: 5px;
+}
+
+.table-list .ui-table-scrollable-body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+.table-list .ui-table-scrollable-body::-webkit-scrollbar {
+  width: 6px;
+  background-color: #F5F5F5;
+}
+
+.table-list .ui-table-scrollable-body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, .3);
+  background-color: #AFA899;
+}
+
+body {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/********************************** FLEX CSS  *********************************/
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.ui-dialog {
+  .ui-dialog-content {
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 5px;
+    overflow: hidden !important;
+  }
+}
+
+.ui-dialog.ui-confirmdialog {
+  background: #fff;
+  padding: 15px;
+  width: 35em;
+
+  .ui-dialog-titlebar {
+    border: none;
+    background: #fff;
+  }
+
+  .ui-dialog-footer {
+    border: none;
+    margin-top: 10px;
+  }
+}
+
+.pop-up-style-generique {
+  .ui-calendar {
+    .ui-inputtext {
+      margin-top: 0;
+    }
+  }
+
+  .section-element .text-field {
+    margin-top: 0;
+  }
+}

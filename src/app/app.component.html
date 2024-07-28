@@ -1,0 +1,26 @@
+<script type="text/javascript"> history.pushState(null, null, location.href);
+history.back();
+history.forward();
+window.onpopstate = function () {
+  history.go(1);
+}; </script>
+<ng-container *ngIf="!isConnected || isFirstTimeAssociation; else isConnectedInterface ">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template class="d-flex justify-content-between flex-column"  #isConnectedInterface>
+  <div class="rhis-header-container">
+    <app-header class="rhis-header-container"></app-header>
+  </div>
+
+  <div class="content-pointeuse--layout d-flex flex-row">
+    <div>
+      <app-menu></app-menu>
+    </div>
+    <div class="content-pointeuse--composant"
+         [ngClass]="{'menu-Opened': menuState}">
+      <router-outlet> </router-outlet>
+    </div>
+  </div>
+
+</ng-template>

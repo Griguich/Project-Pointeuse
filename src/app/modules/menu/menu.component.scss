@@ -1,0 +1,352 @@
+@import '../../../styles/generique';
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/********************************* INTEGRATION CONTENU POINTEUSE *******************************/
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+input#menu {
+  display: none;
+}
+
+label.icon {
+  position: fixed;
+  z-index: 200;
+  bottom: 0;
+}
+
+@media screen and (max-width: 991px) {
+  label.icon {
+    display: none;
+  }
+}
+
+.icon {
+  cursor: pointer;
+  display: block;
+  height: 55px;
+  padding: 8px;
+  width: 50px;
+
+  .menu,
+  .menu::before,
+  .menu::after {
+    background: #9FB1BD;
+    content: '';
+    display: block;
+    height: 2px;
+    position: absolute;
+    transition: background ease .3s, top ease .3s .3s, transform ease .3s;
+    width: 28px;
+  }
+
+  &:hover {
+    .menu,
+    .menu::before,
+    .menu::after {
+      background: $color__orange;
+    }
+  }
+
+  .menu {
+    left: 11px;
+    bottom: 27px;
+
+    &::before {
+      bottom: -6px;
+    }
+
+    &::after {
+      bottom: 6px;
+    }
+  }
+}
+
+#menu:checked + .icon .menu {
+  background: transparent;
+}
+
+#menu:checked + .icon .menu::before {
+  transform: rotate(45deg);
+}
+
+#menu:checked + .icon .menu::after {
+  transform: rotate(-45deg);
+}
+
+#menu:checked + .icon .menu::before,
+#menu:checked + .icon .menu::after {
+  bottom: 0;
+  transition: top ease .3s, transform ease .3s .3s;
+}
+
+nav {
+  background: #fff;
+  box-shadow: 0 10px 20px 0 rgb(0 0 0 / 15%);
+  height: 100vh;
+  padding-top: 10px;
+  position: fixed;
+  transition: width ease .6s;
+  width: 110px;
+  z-index: 100;
+  overflow: hidden;
+  @media screen and (max-width: 991px) {
+    width: 50px;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 1px solid #F0F0F0;
+      color: #8E8E8E;
+      font-family: "TT Wellingtons Medium";
+      font-size: 13px;
+      font-weight: 500;
+      @media screen and (min-width: 992px) {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: stretch;
+        margin-top: 4px;
+      }
+      @media screen and (max-width: 991px) {
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+
+      img {
+        max-width: 35px;
+        width: 35px;
+        margin-right: 10px;
+        margin-left: 10px;
+        margin-bottom: 4px;
+        @media screen and (max-width: 991px) {
+          max-width: 30px;
+          width: 30px;
+        }
+      }
+
+      span {
+        color: #8e8e8e;
+        @media screen and (max-width: 991px) {
+          padding-left: 0;
+        }
+      }
+    }
+
+    &:nth-child(8) {
+      li:nth-child(2) {
+        display: none;
+      }
+    }
+  }
+}
+
+#menu:checked ~ nav {
+  width: 250px;
+}
+
+.synchronisation-style {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  @include box-shadow__generigue;
+  border: 1px solid #b0a99a;
+  background-image: linear-gradient(-180deg, #fff 0%, #fff 100%);
+  box-shadow: 0 1rem 1.25rem 0 rgba(225, 225, 225, 0.5),
+  0 -0.25rem 1.5rem rgb(214, 205, 187) inset,
+  0 0.75rem 0.5rem rgba(255, 255, 255, 0.4) inset,
+  0 0.25rem 0.5rem 0 rgb(191, 183, 167) inset;
+  cursor: pointer;
+
+  img {
+    max-width: 35px;
+    width: 100%;
+  }
+
+  &:focus, &:hover {
+    border: 4px solid $menu-text__color--active;
+    transition: 0.70s;
+    -webkit-transition: 0.70s;
+    -moz-transition: 0.70s;
+    -ms-transition: 0.70s;
+    -o-transition: 0.70s;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+}
+
+.style-synchro-generique {
+  margin-bottom: 15px;
+}
+
+:host ::ng-deep {
+  .ui-datepicker table {
+    margin: 0 !important;
+  }
+}
+
+#RESTAURANT_synchro-btn.button-popup-rhis {
+  margin-top: 20px;
+}
+
+.smallSize-menu {
+  input#menu {
+    display: none;
+  }
+
+  .icon {
+    background: #FFF;
+    cursor: pointer;
+    display: block;
+    height: 24px;
+    padding: 25px;
+    width: 50px;
+    margin-bottom: 0;
+  }
+
+  label.icon {
+    position: fixed;
+    z-index: 200;
+  }
+
+  .icon .menu,
+  .icon .menu::before,
+  .icon .menu::after {
+    background: #9FB1BD;
+    content: '';
+    display: block;
+    height: 2px;
+    position: absolute;
+    transition: background ease .3s, top ease .3s .3s, transform ease .3s;
+    width: 20px;
+  }
+
+  .icon:hover .menu,
+  .icon:hover .menu::before,
+  .icon:hover .menu::after {
+    background: #47B74B;
+  }
+
+  .icon .menu {
+    left: 18px;
+    top: 27px;
+  }
+
+  .icon .menu::before {
+    top: -6px;
+  }
+
+  .icon .menu::after {
+    top: 6px;
+  }
+
+  #menu:checked + .icon .menu {
+    background: transparent;
+  }
+
+  #menu:checked + .icon .menu::before {
+    transform: rotate(45deg);
+  }
+
+  #menu:checked + .icon .menu::after {
+    transform: rotate(-45deg);
+  }
+
+  #menu:checked + .icon .menu::before,
+  #menu:checked + .icon .menu::after {
+    top: 0;
+    transition: top ease .3s, transform ease .3s .3s;
+  }
+
+  nav {
+    background: #FFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+    height: 100vh;
+    padding-top: 60px;
+    position: fixed;
+    transition: width ease .6s;
+    width: 60px;
+    z-index: 100;
+
+    overflow: hidden;
+  }
+
+  #menu:checked ~ nav {
+    width: 200px;
+  }
+
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav li {
+    cursor: pointer;
+    display: block;
+    line-height: 60px;
+    padding-left: 16px;
+    white-space: nowrap;
+  }
+
+  nav i {
+    color: #9FB1BD;
+    margin-right: 24px;
+    vertical-align: text-bottom;
+  }
+}
+
+nav.smallSize-menu.menu-opened {
+  width: 140px;
+
+  ul li {
+    img {
+      margin-right: 3px;
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  nav {
+    ul li {
+      font-size: 11px;
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  :not(.smallSize-menu.menu-display) {
+    label {
+      display: none;
+    }
+  }
+}
+
+label.icon,
+.icon .menu,
+.icon .menu::before,
+.icon .menu::after {
+  display: none;
+}
+
+nav:not(.smallSize-menu) ul {
+  li#MENU_Employee-Quitter-item,
+  li#MENU_Technicien-Quitter-item,
+  li#MENU_Manager-Quitter-item {
+    position: absolute;
+    bottom: 85px;
+    left: 25px;
+    border: none;
+  }
+}

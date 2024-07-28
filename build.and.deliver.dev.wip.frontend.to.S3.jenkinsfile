@@ -1,0 +1,52 @@
+pipeline {
+    agent {label 'Slave2'}
+    	options { skipDefaultCheckout() }
+ stages {
+  	stage('Git') {
+            steps {
+                cleanWs()
+                checkout scm
+            }
+  	}
+
+
+   	stage('Display tools versions') {
+	    	steps {
+	    		echo 'Yarn version on jenkins machine :'
+				sh 'yarn -version'
+				echo 'Node on jenkins machine :'
+				sh 'node --version'
+				echo 'Nginx check on the target server : '
+		    }
+	    }
+
+    	stage('Install dependencies from yarn.lock') {
+    		steps{
+    			//https://yarnpkg.com/lang/en/docs/cli/install/#toc-yarn-install
+    			//https://yarnpkg.com/lang/en/docs/cli/install/#toc-yarn-install-frozen-lockfile
+				sh 'yarn install --frozen-lockfile'
+    		}
+	    }
+
+        stage('Build') {
+    		steps{
+    			//https://angular.io/guide/build#building-and-serving-angular-apps
+    			//This should generate all static content under dist folder
+				sh 'yarn run build --configuration=generic'
+    		}
+	    }
+
+	   	stage('Deliver the new application version to S3') {
+    		steps {
+								sh 'zip -r dist.zip dist'
+    		            sh 'sudo mount /home/ubuntu/Pointeuse_web_wip/delivery_S3'
+				        sh 'sudo rm -rf /home/ubuntu/Pointeuse_web_wip/delivery_S3/current/dist.zip'
+        				sh 'sudo mv dist.zip /home/ubuntu/Pointeuse_web_wip/delivery_S3/current'
+        			    sh 'sudo umount /home/ubuntu/Pointeuse_web_wip/delivery_S3'
+
+		    }
+	    }
+
+}
+
+}

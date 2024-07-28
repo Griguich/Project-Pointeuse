@@ -1,0 +1,34 @@
+<div *ngIf="selectedRapport?.codeName === RAPPORT_CORRECTION"
+     class="rapport_correction" >
+  <div class="mb-4 flex-start-block">
+    <div class="label-periode-debut mt-5">
+      <label class="section-element-title">{{'POPUP_RAPPORT.CHOIX_DATE' | translate}}*</label>
+    </div>
+    <div class="position-relative">
+      <div>
+        <div>
+          <p-calendar
+            [(ngModel)]="selectedDate"
+            [showIcon]="true"
+            appendTo="body"
+            dateFormat="dd/mm/yy"
+            id="RESTAURANT_Rapport-date">
+          </p-calendar>
+        </div>
+        <div class="row">
+          <div class="col align-self-end">
+            <button (click)="generateRapport()"
+                    class="btn button-popup-rhis orange-background color-btn-white-rhis btn-save-rhis"
+                    type="button">
+              <span>{{"POPUP_RAPPORT.AFFICHER" | translate | uppercase}}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,24 @@
+{
+  "hostServerPointeuse": "http://127.0.0.1:8080",
+  "hostLocalServer": "http://127.0.0.1:7075",
+  "hostServerGdh": "http://127.0.0.1:2006",
+  "hostServerSecurity": "http://127.0.0.1:2005",
+  "hostServerEmployee": "http://127.0.0.1:2003",
+  "hostServerPlanning": "http://127.0.0.1:2004",
+  "hostServerRapport": "http://127.0.0.1:2007",
+  "pointageQueue" : "/amq/queue/listPointage",
+  "correctionQueue" : "/amq/queue/listCorrectionPointage",
+  "title": "2.6.0",
+  "elkUrl": "http://elk-pointeuse.myrhis.fr:9200",
+  "elasticSearchUsername": "frontPointeuse",
+  "elasticSearchPassword": "o#:M45)=.=zS!",
+  "delayMsBetweenhealthRequests": 60000,
+  "enableMonitoring": true,
+  "rabbitMQ": {
+    "brokerURL": "wss://qa-rabbitmq.myrhis.fr:15674/ws",
+    "connectHeaders": {
+      "login": "pointeuseqa",
+      "passcode": "DfgZp3MSpsdLk3WA"
+    }
+  }
+}

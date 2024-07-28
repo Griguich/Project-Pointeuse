@@ -1,0 +1,66 @@
+<!-- if we display ``pointage`` not associated with a shift (shift?.idShift = null)
+ or an absence that does precede a shift((absence != null) && (intersection = false)
+ it is offset from the top with ${top} px
+ -->
+<div class="flex-container"
+     [style.width.px]="widthTotal"
+     [id]="id"
+     [style.left.px]="left + 30">
+  <div class="time" [style.width.px]="widthLeft" *ngIf="!isPlanif && pointage && widthLeft > 0" (click)="startAbsenceData(pointage, shift)"
+       [ngClass]="{'red-block' : pointage?.arrives > 0 , 'yellow-block' : pointage?.arrives < 0 }">
+  </div>
+  <div *ngIf="color != undefined && color !== '#2DC76Dcc'" class="time small-font" [style.width.px]="width"
+       [ngStyle]="{'background-color' : color}" (click)="innerPointingClicked()"
+       [ngClass]="{'pointage-border': !isPlanif && pointage,
+                    'small-shift-generic-inf-52': width <= 60,
+                    'small-pointage-inf-52': width <= 52 && pointage,
+                    'small-shift-generic-inf-30': width <= 30,
+                    'shiftSign': shift?.sign && isPlanif}">
+      <span *ngIf="!isPlanif && pointage">
+        <!-- si c'est un pointage achevale on affiche heureDebutAcheval sinon on affiche heureDebut -->
+        <span class="{{cssClassDebut}}" *ngIf="pointage?.isAcheval"> {{pointage?.heureDebutAcheval | slice:0:5}} </span>
+        <span class="{{cssClassDebut}}" *ngIf="!pointage?.isAcheval"> {{pointage?.heureDebut | slice:0:5}} </span>
+        <span class="{{cssClassTiret}}">  -  </span>
+        <span *ngIf="pointage['isCompleted']" class="{{cssClassFin}}"> {{pointage?.heureFin | slice:0:5}}</span>
+      </span>
+    <span *ngIf="isPlanif">
+      <span *ngIf="!shift?.acheval || (shift?.acheval && shift?.modifiable)">{{shift?.heureDebut | slice:0:5}}</span>
+       <span *ngIf="shift?.acheval && !shift?.modifiable" >{{shift?.heureDebutCheval | slice:0:5}}</span>
+      <span> - </span>
+      <span *ngIf="!shift?.acheval || (shift?.acheval && !shift?.modifiable)" >{{shift?.heureFin | slice:0:5}}</span>
+      <span  *ngIf="shift?.acheval && shift?.modifiable" >{{shift?.heureFinCheval | slice:0:5}}</span>
+    </span>
+    <div [ngClass]="{'shiftSignTriangle': shift?.sign && isPlanif}"
+         class="shift-signe-texte">
+    </div>
+  </div>
+  <div *ngIf="color != undefined &&  color === '#2DC76Dcc'">
+    <span *ngIf="color != undefined &&  color === '#2DC76Dcc' && !pointage?.idShift && !checkPointingIntersectionWithShift()">
+      <br>
+    </span>
+    <div class="time small-font" [style.width.px]="width"
+      [ngStyle]="{'background-color' : color}" (click)="innerPointingClicked()" [ngClass]="{'pointage-border': !isPlanif && pointage,
+                   'small-shift-generic-inf-52': width <= 60,
+                   'small-pointage-inf-52': width <= 52 && pointage,
+                   'small-shift-generic-inf-30': width <= 30,
+                   'shiftSign': shift?.sign && isPlanif}">
+      <span *ngIf="!isPlanif && pointage &&  color === '#2DC76Dcc'">
+        <span class="{{cssClassDebut}}" *ngIf="pointage?.isAcheval"> {{pointage?.heureDebutAcheval | slice:0:5}} </span>
+        <span class="{{cssClassDebut}}" *ngIf="!pointage?.isAcheval"> {{pointage?.heureDebut | slice:0:5}} </span>
+        <span class="{{cssClassTiret}}"> - </span>
+        <span *ngIf="pointage['isCompleted']" class="{{cssClassFin}}"> {{pointage?.heureFin | slice:0:5}}</span>
+      </span>
+    </div>
+  </div>
+  <div class="time" [style.width.px]="widthRight" *ngIf="!isPlanif && pointage && widthRight>0"
+       [ngClass]="{'red-block' : pointage?.sortie < 0 , 'yellow-block' : pointage?.sortie > 0 }" (click)="endAbsenceData(pointage, shift)">
+  </div>
+  <ng-container *ngFor="let part of parts">
+    <div class="time green-block" [style.width.px]="getDuration | memoize:minutesWidht:part[0]:dateService" *ngIf="part[0]">
+    </div>
+    <div class="time red-block" [style.width.px]="getDuration | memoize:minutesWidht:part[1]:dateService" *ngIf="part[1]"  (click)="endAbsenceData(part[1]?.interval, part[1]?.shift)">
+    </div>
+    <div class="time yellow-block" [style.width.px]="getDuration | memoize:minutesWidht:part[2]:dateService" *ngIf="part[2]">
+    </div>
+  </ng-container>
+</div>

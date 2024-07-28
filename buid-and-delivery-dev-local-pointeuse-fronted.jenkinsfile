@@ -1,0 +1,58 @@
+pipeline {
+    agent any
+    	options { skipDefaultCheckout() }
+ stages {
+  	stage('Git') {
+            steps {
+                cleanWs()
+                checkout scm
+            }
+  	}
+
+
+   	stage('Display tools versions') {
+	    	steps {
+	    		echo 'Yarn version on jenkins machine :'
+				sh 'yarn -version'
+				echo 'Node on jenkins machine :'
+				sh 'node --version'
+				echo 'Nginx check on the target server : '
+		    }
+	    }
+
+    	stage('Install dependencies from yarn.lock') {
+    		steps{
+    			//https://yarnpkg.com/lang/en/docs/cli/install/#toc-yarn-install
+    			//https://yarnpkg.com/lang/en/docs/cli/install/#toc-yarn-install-frozen-lockfile
+				sh 'yarn install --frozen-lockfile'
+    		}
+	    }
+
+        stage('Build') {
+    		steps{
+    			//https://angular.io/guide/build#building-and-serving-angular-apps
+    			//This should generate all static content under dist folder
+				sh 'yarn run build --configuration=generic'
+    		}
+	    }
+
+	   	stage('Deliver the new application version to local') {
+    		steps {
+							
+    		            sh 'sudo rm -rf /home/rhis/pointeuse/delivery_local/dist'
+        				sh 'sudo mv dist /home/rhis/pointeuse/delivery_local'
+
+		    }
+	    }
+		stage('Call Restart Services') {
+            steps{
+                script{
+              build job: 'restart-dev-pointeuse-front'
+
+              }
+             }
+         }
+
+}
+
+}

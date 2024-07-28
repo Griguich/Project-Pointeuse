@@ -1,0 +1,123 @@
+/****************************************************************
+#Script Name	: Build and deliver Angular application to EFS
+#Description	:
+# This script is designed to run on jenkins, it will  :
+# 1) Empty the workspace and download code from git.
+# 2) Display tools versions; yarn, node on jenkins; and nginx on remote machine.
+# 3) Install dependencies from yarn.lock.
+# 4) Build using specific environments (to generate dist folder).
+# 5) Deliver the new application version to the EFS (shared network disk)
+#Args           : no args.
+#Author       	: Walid YAICH
+#Email         	: walid.yaich@gmail.com
+#NOTE  			: Please read the documentation at the end of this script
+******************************************************************/
+
+
+pipeline {
+    agent {label 'Slave1'}
+
+	options { skipDefaultCheckout() }
+
+    stages {
+
+       	stage('Git') {
+            steps {
+                cleanWs()
+                checkout scm
+            }
+        }
+
+    	stage('Display tools versions of yarn & node') {
+	    	steps {
+	    		echo 'Yarn version on jenkins machine :'
+				sh 'yarn -version'
+				echo 'Node on jenkins machine :'
+				sh 'node --version'
+				echo 'Nginx check on the target server : '
+		    }
+	    }
+
+
+    	stage('Install dependencies from yarn.lock') {
+    		steps{
+    			//https://yarnpkg.com/lang/en/docs/cli/install/#toc-yarn-install
+    			//https://yarnpkg.com/lang/en/docs/cli/install/#toc-yarn-install-frozen-lockfile
+				sh 'yarn install --frozen-lockfile'
+    		}
+	    }
+
+        stage('Build') {
+    		steps{
+    			//https://angular.io/guide/build#building-and-serving-angular-apps
+    			//This should generate all static content under dist folder
+				sh 'yarn run build --configuration=generic'
+    		}
+	    }
+		
+
+  stage('Create Backup CurrentVersion in PROD-WIP'){
+            steps {
+                script{
+
+                    build 'backup-CurrentVersion-in-prod-wip-Myrhis'
+
+                }
+            }
+        }
+
+
+
+		    	stage('Deliver the new application version to S3') {
+    		steps {
+
+            sh '''
+			
+				#always pointeuse front will take the same version as v2 backend without incrementing versioning
+				FinalVersion=$(ls  /home/ubuntu/myrhisV2/delivery_S3/myrhis/prod-wip/current | grep -E '.*employee.*.jar$' | grep -Eo '[0-9]+\\.[0-9]+\\.[0-9]+')
+    		    zip -r dist-pointeuse-$FinalVersion.zip dist
+				rm -rf /home/ubuntu/myrhisV2/delivery_S3/myrhis/prod-wip/current/dist-pointeuse-*.zip
+				mv dist-pointeuse-$FinalVersion.zip /home/ubuntu/myrhisV2/delivery_S3/myrhis/prod-wip/current
+
+			'''.stripIndent()
+
+		    }
+	    }
+
+
+    }
+}
+/********************** TROUBLESHOOTING ***********************************************
+TODO .....
+*/
+
+
+/************ GOOG TO KNOW about bash option
+ please, note that "-" will enable the feature and "+" will disable it ! for exemple :
+ +e : will disable the errexit
+ -e : will enable the errexit
+
+ -e : errexit  : Abort script at first error, when a command exits with non-zero status  (except in until or while loops, if-tests, list constructs)
+ -x : xtrace : Print each command to stdout before executing it, and, expands commands.
+ -s : stdin  : Read commands from stdin
+https://www.tldp.org/LDP/abs/html/options.html
+*/
+
+/**************GOOG TO KNOW about ssh/scp without passwd
+ Jenkins should not be waiting for password from stdin when running remote commands via ssh or scp.
+ so we need to configure jenkins machine to ssh other machines without password, to do so we
+ have to add jenkins RSA public key to the authorized_keys of the target machine.
+ i run this command on jenkins machine
+ cat /home/ubuntu/.ssh/id_rsa.pub | ssh -i config_key.pem ubuntu@nginx.recette.myrhis.interne.fr "cat >> .ssh/authorized_keys"
+ https://mikeeverhart.net/2013/05/adding-an-ssh-key-to-amazon-ec2/
+ if you're using classic virtual machine you can use this command : ssh-copy-id.
+ https://askubuntu.com/questions/4830/easiest-way-to-copy-ssh-keys-to-another-machine
+*/
+
+/************About jenkins pipelines************
+//https://jenkins.io/blog/2017/02/07/declarative-maven-project/
+//https://stackoverflow.com/questions/43987005/jenkins-does-not-recognize-command-sh
+//"Manage Jenkins -> Configure System" and i added an environment vaiable : PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin
+//.stripIndent() : because EOF : command not found
+************About jenkins pipelines************/
+

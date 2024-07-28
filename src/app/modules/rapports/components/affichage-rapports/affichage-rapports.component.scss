@@ -1,0 +1,29 @@
+.scroll, .pop-up-content, textarea, .ui-menu {
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &:hover::-webkit-scrollbar {
+    width: 8px;
+  }
+}
+
+
+.scroll, .pop-up-content, textarea, .ui-menu {
+  &::-webkit-scrollbar-thumb {
+    background-color: #9B9B9B;
+    border-radius: 3.5px;
+  }
+}
+
+.pdf {
+  height: inherit;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.pointeuse-container-rapport {
+  height: 80%;
+  position: fixed;
+  width: 86%;
+}

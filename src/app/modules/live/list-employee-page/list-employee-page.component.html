@@ -1,0 +1,203 @@
+<div class="general-contenu">
+  <div (rhisHeightScrollableSection)="heightInterface = ($event + 'px')"
+       [offset]="160"
+       class="general-contenu--header">
+    <div class="logo">
+      <img src="assets/icons/header/Logo_MyRHIS.svg">
+    </div>
+    <div class="restaurant-name">
+      <h1 class="title">{{ nameRestaurant }}</h1>
+      <span *ngIf="!(onlineService?.onlineState() | async)"
+            class="offline-libel">
+        {{'PLANNING_PAGE_PRINCIPALE.OFFLINE_LIBEL' |translate}}
+      </span>
+    </div>
+    <div class="header__information--date col-4">
+
+      <span *ngIf="!(onlineService?.onlineState() | async)"
+            class="offline-libel">{{'PLANNING_PAGE_PRINCIPALE.OFFLINE_LIBEL' |translate}}</span>
+      <div class="block__contenu-page--clock centreText text-styling" style="display: flex;text-align: center;flex-direction: column;"
+           id="RESTAURANT_VueL-HeureActuel">
+        {{ heureCourant | date:'HH:mm'  }}
+      </div>
+      <div *ngIf="authorizationIdle>=1 && router.url.length===1 && sessionService.getAutorisation()"
+           class="centreText"
+           id="RESTAURANT_VueL-Auto-exp">
+        {{authorizationLabel}} : {{authorizationIdle}}
+      </div>
+    </div>
+
+    <div class="input">
+      <div (rhisClickOutside)="badgeKeyboard()" style="text-align: right">
+        <input #keyboardInput
+               class="animated-placeholder"
+               (click)="this.instantiateKeybord('simple-keyboard', 'onKeyPress');"
+               (focusin)="isBadgeEnteredManually = true"
+               (focusout)="isBadgeEnteredManually = false"
+               (keydown.enter)="passBadgeManually(keyboardInput.value)"
+               autocomplete="off"
+               id="codeBadge"
+               inputmode='none'
+               placeholder="passerVotreBadge"
+               rhisIntegerNumbers
+               maxlength="15"
+               type="text"
+        />
+        <div *ngIf="!isMobile">
+          <div *ngIf="displayBadgeKeyboard" class="simple-keyboard animated-div"></div>
+        </div>
+        <div *ngIf="isMobile">
+          <div class="simple-keyboard"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content-live">
+    <div class="content-planning">
+      <div class="bgPlanning">
+        <div class="planning-content">
+          <div class="planning-pointeuse_content">
+            <div (scroll)="scrollToRealTime()"
+                 class="table-list planning-table position-relative">
+              <div>
+                <h2 [ngSwitch]="this.sessionService.getDisplayDateOption()" style="text-align: center;">
+                  <span *ngSwitchCase="1">{{ this.rhisTranslateService.translate("optionAffichageDate.jCalen") + ' : ' + getDayName() + (getcalendarDate()|date: 'dd-MM-yyyy')}}</span>
+                  <span *ngSwitchCase="2">{{this.rhisTranslateService.translate("optionAffichageDate.jActiv") + ' : ' + getjourner() + (dateJournee|date: 'dd-MM-yyyy') }} </span>
+                  <span *ngSwitchCase="3">{{ this.rhisTranslateService.translate("optionAffichageDate.jCalen") + ' : ' + getDayName() + (getcalendarDate()|date: 'dd-MM-yyyy')}}<br>{{this.rhisTranslateService.translate("optionAffichageDate.jActiv") + ' : ' + getjourner() + (dateJournee|date: 'dd-MM-yyyy')}} </span>
+                </h2>
+              </div>
+              <br>
+              <div *ngIf="showEmptyMessage"
+                   class="w-100 d-flex justify-content-center bgPlanning--text ">
+                {{"EMPLOYEE.AUCUN_MESSAGE" | translate}}
+              </div>
+
+
+              <div [ngStyle]="{'height': heightInterface}"
+                   id="vue-planning">
+                <p-table
+                  (onSort)="customSortByEmpl($event)"
+                  *ngIf="listEmployees?.length"
+                  [columns]="header"
+                  [customSort]="true"
+                  [scrollHeight]="heightInterface"
+                  [scrollable]="true"
+                  [style]="{'max-width.px': maxWidthPlanning}"
+                  [value]="listEmployees"
+                  frozenWidth="140px">
+                  <ng-template let-columns pTemplate="colgroup">
+                    <colgroup>
+                      <col *ngFor="let col of columns; let odd = odd ; trackBy: trackCol"
+                           [style.width.px]="odd ? 31 : 30">
+                    </colgroup>
+                  </ng-template>
+                  <ng-template pTemplate="frozenheader">
+                    <tr class="header-row" id="table-header-hourly">
+                      <th [pSortableColumn]="'prenom'" [style.width.px]="employeeBlockWidth">
+                        <div>
+                          {{"PLANNING_PAGE_PRINCIPALE.EMPLOYE" | translate}}
+                          <p-sortIcon [field]="'prenom'" ariaLabel="Activate to sort"
+                                      ariaLabelAsc="Activate to sort in ascending order"
+                                      ariaLabelDesc="Activate to sort in descending order">
+                          </p-sortIcon>
+                        </div>
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template let-employe pTemplate="frozenbody">
+                    <tr class="day-hour-table-row">
+                      <td #employeeHeader>
+                        <ng-container>
+                          <div class="name-employee ml-2">
+                            <div class="empl-prenom">{{employe?.prenom}}</div>
+                            <div class="badge-planning">({{employe?.badge?.code}})</div>
+                            <div class="empl-nom">{{employe?.nom.length > 9 ? employe?.nom.slice(0, 9) + '..' : employe?.nom}}</div>
+                          </div>
+                        </ng-container>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template let-columns pTemplate="header">
+                    <tr>
+                      <th *ngFor="let col of columns; trackBy: trackCol">
+                        {{col.title}}
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template let-columns="columns" let-employe let-employeIndex="rowIndex" pTemplate="body">
+                    <tr #tableRow [pSelectableRow]="employe" class="day-hour-table-row">
+                      <td *ngFor="let col of columns; let l = last; trackBy: trackHeader.bind(this, employeIndex)"
+                          [ngClass]="{'last-half-hour': l && getEndHourIfShouldBeDisplayed() != ''}">
+                        <ng-container *ngFor="let shift of employe?.shifts; trackBy: trackItem">
+                          <div *ngIf="getDisplayCondition | memoize: [shift, col]" class="d-block">
+
+                            <!-- plannif and pointage div -->
+                            <div>
+                              <rhis-hours-div *ngIf="shift?.idShift !== null"
+                                              [id]="employe?.idEmploye"
+                                              [isPlanif]="true"
+                                              [shift]="shift"
+                                              [widthOfMinute]="widthOfMinute"></rhis-hours-div>
+                            </div>
+                            <div *ngIf="shift?.pointages" class="d-flex">
+                              <!-- Display pointages -->
+                              <ng-container
+                                *ngFor="let pointage of shift?.pointages; let i = index; trackBy: trackItem">
+                                <ng-container *ngTemplateOutlet="pointingDetails;
+                     context: {index: i, pointageAbsence: {shift: {id: shift?.idShift}, data: pointage, shown : false, error: false},
+                     partitions: pointage?.idFront ? (getAssociatedShifts | memoize: dateService: pointage: shift: employe?.shifts: employe) : null,
+                      shift: shift, pointage: pointage, employe: employe, employeIndex: employeIndex}">
+                                </ng-container>
+                              </ng-container>
+                            </div>
+                          </div>
+                        </ng-container>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+                <ng-template #pointingDetails
+                             let-employe="employe"
+                             let-i="index"
+                             let-intersection="intersection"
+                             let-partitions="partitions"
+                             let-pointage="pointage"
+                             let-shift="shift">
+                  <div [style.margin-left.px]="getMarginLeft(shift, i, widthOfMinute, employe, dateService)"
+                       class="fitContent">
+                    <rhis-hours-div
+                      [employe]="employe"
+                      [id]="employe?.idEmploye"
+                      [intersection]="intersection"
+                      [isPlanif]="false"
+                      [partitions]="partitions"
+                      [pointage]="getPointage | memoize: pointage : shift: i: employe: widthOfMinute: dateService"
+                      [shift]="shift"
+                      [widthOfMinute]="widthOfMinute">
+                    </rhis-hours-div>
+                  </div>
+                </ng-template>
+              </div>
+              <ng-container #realTime></ng-container>
+              <ng-template #realTimeTemplate>
+                <div [hidden]="!hiddenLineRealTime"
+                     [style.height.px]="(listEmployees?.length * 72) + 50"
+                     [style.left.px]=leftReal
+                     [style.max-height.px]="415"
+                     class="block-real-time">
+                  <div class="circle">
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- TO DO -->
+  <!--  <div class="footer__badge">
+      {{isMobile === true ? ("PLANNING_PAGE_PRINCIPALE.CLOCK_PAGE.PASS_YOUR_CODE"| translate) : ("PLANNING_PAGE_PRINCIPALE.CLOCK_PAGE.PASS_YOUR_BADGE"| translate) }}
+    </div>-->
+
+<p-toast [style]="{marginTop: '80px'}"></p-toast>

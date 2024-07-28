@@ -1,0 +1,148 @@
+@import '../../../../styles/generique';
+
+/*********************************************************************************************************/
+/*--------------------------------------------- MESSAGE TEXTE ------------------------------------------*/
+/*_____________________________________________________________________________________________________*/
+
+.block__contenu-page-text-area {
+
+  .form-control {
+    border: 1px solid $color-blue;
+    height: 130px;
+    @media screen and (max-width: 991px) {
+      height: 118px;
+    }
+
+    &::placeholder {
+      font-size: 16px;
+    }
+
+    &:focus {
+      border: 1px solid $color-blue;
+      box-shadow: 0 0 0 0.2rem rgba(56, 95, 227, 0.25);
+    }
+  }
+}
+
+.hg-theme-default {
+  background: $clavier__background;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  color: $color--base;
+  top: 115px;
+}
+
+.display__clavier {
+  .message__text-area {
+    /* margin-top: 135px;*/
+  }
+}
+
+
+/*********************************************************************************************************/
+/*--------------------------------------------- MESSAGE AUDIO ------------------------------------------*/
+/*______________________________________________________________________________________________________*/
+
+.block-audio {
+  border: 10px solid $color--base;
+  height: 320px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 15px;
+  @include border-radius__generique(5px, 5px, 5px, 5px);
+
+  &__time {
+    text-align: center;
+    margin: 15px 0;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "TT Wellingtons Medium";
+    color: $text__color--base;
+  }
+
+  &__bloc-enregistrement {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+    margin: 20px 0;
+  }
+
+  &--titre {
+    font-family: "TT Wellingtons Medium";
+    color: $text__color--base;
+    margin: 15px 0;
+    text-align: center;
+  }
+}
+
+.button-start {
+  width: 170px;
+  height: 170px;
+  font-family: "TT Wellingtons Medium";
+  margin: 0 auto;
+
+  &__circle {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    border: 10px solid $color__orange--border;
+    overflow: hidden;
+    background: $color--orange;
+    box-shadow: 0px 3px 8px #aaa, inset 0px 2px 3px #fff;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.65);
+    transition: .4s;
+    background-image: -webkit-linear-gradient(top, $color--orange, $color__orange-cercle--hover);
+
+    &:hover {
+      background: $color__orange-cercle--hover;
+    }
+
+    &--link {
+      display: block;
+      float: left;
+      width: 100%;
+      padding-top: 50%;
+      padding-bottom: 50%;
+      line-height: 1em;
+      margin-top: -0.5em;
+      text-align: center;
+      color: $color--default !important;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button-cancel {
+  margin-top: 40px;
+  width: 100px;
+  color: $color--default;
+  overflow: hidden;
+  background: $color--orange;
+  font-size: 14px;
+  @include border-radius__generique(5px, 5px, 5px, 5px);
+}
+
+.block__contenu-page-text-area.display__clavier
+.simple-keyboard.hg-theme-default.hg-layout-default {
+  display: block;
+}
+
+.block__contenu-page-text-area.display__clavier--not
+.simple-keyboard.hg-theme-default.hg-layout-default {
+  display: none;
+}
+
+.hg-theme-default {
+  height: 228px !important;
+}

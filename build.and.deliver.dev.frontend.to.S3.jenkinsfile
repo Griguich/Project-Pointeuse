@@ -1,0 +1,55 @@
+pipeline {
+    agent {label 'Slave1'}
+ stages {
+  	stage('Git') {
+            steps {
+                cleanWs()
+                checkout scm
+            }
+  	}
+
+
+   	stage('Display tools versions') {
+	    	steps {
+	    		echo 'Yarn version on jenkins machine :'
+				sh 'yarn -version'
+				echo 'Node on jenkins machine :'
+				sh 'node --version'
+				echo 'Nginx check on the target server : '
+		    }
+	    }
+
+    	stage('Install dependencies from yarn.lock') {
+    		steps{
+    			//https://yarnpkg.com/lang/en/docs/cli/install/#toc-yarn-install
+    			//https://yarnpkg.com/lang/en/docs/cli/install/#toc-yarn-install-frozen-lockfile
+				sh 'yarn install --frozen-lockfile'
+    		}
+	    }
+
+        stage('Build') {
+    		steps{
+    			//https://angular.io/guide/build#building-and-serving-angular-apps
+    			//This should generate all static content under dist folder
+				sh 'yarn run build --configuration=generic'
+    		}
+	    }
+
+	   	stage('Deliver the new application version to S3') {
+    		steps {
+						sh 'zip -r dist-pointeuse.zip dist'
+				        sh 'rm -rf /home/ubuntu/myrhisV2/delivery_S3/myrhis/dev/current/dist-pointeuse.zip'
+        				sh 'mv dist-pointeuse.zip /home/ubuntu/myrhisV2/delivery_S3/myrhis/dev/current'
+
+		    }
+	    }
+		        stage('Restart DEV POINTEUSE services') {
+            steps {
+				build 'restart-dev-Pointeuse-services'
+            }
+        }
+
+
+}
+
+}

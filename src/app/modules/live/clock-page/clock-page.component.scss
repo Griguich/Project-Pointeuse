@@ -1,0 +1,237 @@
+@import '../../../../styles/color';
+
+* {
+  font-family: "Calibri Regular", sans-serif !important;
+}
+
+.block__contenu-page--top {
+  align-items: center;
+  padding: 15px 0 20px 0;
+  margin-bottom: 0;
+  @media screen and (max-width: 767px) {
+    padding: 7px 0 15px 0;
+  }
+
+  &-titre {
+    line-height: 32px;
+    text-align: center;
+  }
+}
+
+.clock_page {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.planning-pointeuse_header {
+  margin-bottom: 10px;
+}
+
+:host ::ng-deep {
+
+  .simple-keyboard.hg-theme-default.hg-layout-numeric {
+    box-shadow: 0 0 33px rgba(16, 14, 23, .33);
+
+    .hg-button {
+      font-size: 30px;
+    }
+  }
+
+  .hg-theme-default .hg-button {
+    background: #f1f1f1;
+  }
+
+  .simple-keyboard.hg-theme-default.hg-layout-numeric {
+    position: static;
+    width: 100%;
+    box-shadow: inherit;
+    background: none;
+  }
+
+  .hg-theme-default.hg-layout-numeric .hg-button {
+    height: 90px;
+    color: #414141;
+    font-family: "TT Wellingtons Medium", sans-serif !important;
+    @media screen and (max-width: 1200px) {
+      height: 80px;
+    }
+  }
+
+  #codeBadge {
+    width: 100%;
+    height: 51px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #d1d1d9;
+    font-family: "TT Wellingtons Medium", sans-serif !important;
+    font-size: 30px;
+    font-weight: 500;
+    max-width: 180px;
+    text-align: center;
+    color: #414141;
+    @media screen and (max-width: 991px) {
+      max-width: 100px;
+    }
+  }
+
+  #codeBadge.tablette {
+    width: 100%;
+    max-width: 100%;
+    height: 61px;
+    border: none;
+  }
+
+}
+
+h2.restaurant_name {
+  color: #414141;
+  text-align: center;
+  overflow-scrolling: auto;
+  @media screen and (max-width: 991px) {
+    font-size: 26px;
+  }
+}
+
+.text-container {
+  height: 325px;
+  width: 50%;
+  font-size: 30vw;
+}
+
+.block__contenu-page.clock_page {
+  height: 100%;
+  overflow: hidden;
+}
+
+.block-clock {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-rows: 50px auto auto auto 50px;
+  grid-template-columns: repeat(2, 1fr) 35%;
+  background-color: #385fe3;
+  border-radius: 10px;
+  box-shadow: 0 3px 20px 0 rgb(0 0 0 / 20%);
+  font-family: "digital", sans-serif !important;
+  padding: 15px;
+
+  * {
+    color: #fff;
+    font-family: "digital", sans-serif !important;
+    text-align: center;
+  }
+
+  h2 {
+    font-family: "TT Wellingtons Medium", sans-serif !important;
+  }
+
+  h2.color-text-principale, h2.block__contenu-page--top-titre {
+    * {
+      font-family: "TT Wellingtons Medium", sans-serif !important;
+    }
+
+    @media screen and (max-width: 767px) {
+      font-size: 26px;
+    }
+  }
+
+  .hour-clock {
+    font-size: 19vw;
+    height: 62vh;
+  }
+
+  .block__contenu-page--top-titre {
+    grid-area: 1 / 1 / 2 / 4;
+  }
+
+  .hour-clock {
+    grid-area: 2 / 1 / 5 / 3;
+  }
+
+  .clock-keyboard {
+    grid-area: 2 / 3 / 3 / 4;
+  }
+
+  .simple-keyboard {
+    grid-area: 3 / 3 / 5 / 4;
+  }
+
+  .color-text-principale {
+    grid-area: 5 / 1 / 6 / 4;
+  }
+
+  .simple-keyboard.hg-theme-default.hg-layout-numeric {
+    box-shadow: none;
+    color: #414141;
+    font-family: "TT Wellingtons Medium", sans-serif !important;
+  }
+}
+
+.block-clock.web {
+  color: #414141;
+  padding: 15px 30px;
+}
+
+.clock-tablette {
+  height: 100vh;
+
+  .left-content {
+    background: #385fe3;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: #fff;
+
+    .time-pointeuse {
+      font-size: 24vw;
+      font-family: "digital", sans-serif !important;
+    }
+
+    .day-pointeuse {
+      font-family: "TT Wellingtons Medium",sans-serif !important;
+      font-size: 18px
+    }
+
+    .date-pointeuse {
+      font-size: 18px;
+    }
+  }
+
+  .right-content {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding-right: 25px;
+  }
+
+  .right-content.col-0 {
+    display: none;
+  }
+
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+.style-logo-clock {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 50%;
+  background: #fff;
+  height: 70px;
+  width: 70px;
+  padding-top: 7px;
+  padding-left: 7px;
+}
+
+.name-restaurant-clock {
+  font-family: "TT Wellingtons Medium", sans-serif !important;
+  font-size: 36px;
+  font-weight: bold;
+}
+

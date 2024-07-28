@@ -1,0 +1,364 @@
+<div class="change_restaurant_container" #change_restaurant_container>
+</div>
+<!--when its not the first time associating a restaurant -->
+<div *ngIf="this.isFirstTimeAssociation== false" class="pointeuse-generalise login">
+  <div class="row mb-4">
+    <div class="col-6">
+      <div class="card card-login first-block">
+        <div class="title-technecien mb-3">
+          <span >{{'Param_association' | translate}}</span>
+        </div>
+        <div style="display: flex;justify-content: space-around;">
+          <button (click)="deleteAssociation()"
+                  class="btn button-popup-ASS orange-background color-btn-white-rhis btn-save-rhis btn-technicien mr-1"
+                  id="delete_association"
+                  type="button">
+            <span>{{'MENU.DELETE_ASSOCIATION' | translate}}</span>
+          </button>
+
+          <button (click)="showModalDialog()"
+                  class="btn button-popup-ASS orange-background color-btn-white-rhis btn-save-rhis btn-technicien ml-1"
+                  id="EMPLOYEE_messageT-send"
+                  type="button">
+            <span>{{'CHANGER_RESTAURANT' | translate}}</span>
+          </button>
+          
+          
+
+          
+          
+        </div>
+
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card card-login first-block">
+        <div class="title-technecien mb-3">
+          <span class="mr-1">{{'volumePointeuse'|translate}}</span>
+        </div>
+        <div class="d-flex justify-content-start block-volume">
+          <i [ngClass]="imageSource"></i>
+          <p-slider (onChange)="volumeControl($event)"
+                    [(ngModel)]="volume"
+                    class="sliderStyle"
+                    [step]="10"
+                    [min]="0" [max]="100">
+          </p-slider>
+          <span class="volume">{{volume}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mb-4 block-center">
+    <h3 class="title-global">{{'Etat_Pointeuse'|translate}}</h3>
+    <div class="row">
+      <div class="col-3">
+        <div class="card card-login">
+          <div class="title">
+            {{'last_sync'|translate}}
+          </div>
+          <div class="info">
+            <div>{{this.sessionService.getLastSyncType()|translate }}</div>
+            <div *ngIf="getlastSync !=null">{{getlastSync | date: 'dd-MM-yyyy'}}</div>
+            <div *ngIf="getlastSync !=null">{{getlastSync | date: 'hh:mm'}}     </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card card-login">
+          <div class="title">
+            {{'debutJournAct'|translate}}
+          </div>
+          <div class="info">
+            <div>{{this.sessionService.getDebutJournee() | date: 'dd-MM-yyyy'}}</div>
+            <div>{{this.sessionService.getDebutJournee() | date: 'hh:mm'}}     </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card card-login">
+          <div class="title">
+            {{'dateFermetur'|translate}}
+          </div>
+          <div class="info">
+            <div>{{this.sessionService.getFinJournee() | date: 'dd-MM-yyyy' }}</div>
+            <div>{{this.sessionService.getFinJournee() | date: 'hh:mm' }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card card-login">
+          <div class="title">
+            {{'getNbrAbsence'|translate}}
+          </div>
+          <div class="info">
+            <div>{{this.sessionService.getNbrAbsence()}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mb-4 block-center">
+    <div class="row">
+      <div class="col-3">
+        <div class="card card-login">
+          <div class="title">
+           {{ 'getDateProchFermeture'|translate}}
+          </div>
+          <div class="info">
+            <div>{{this.sessionService.getDateProchFermeture() |date: 'dd-MM-yyyy'}}</div>
+          <div>{{this.sessionService.getDateProchFermeture() | date: 'hh:mm'}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card card-login">
+          <div class="title">
+            {{'getDateProchOuverture'|translate}}
+          </div>
+          <div class="info">
+            <div>{{this.sessionService.getDateProchOuverture()  |date: 'dd-MM-yyyy'}}</div>
+            <div>{{this.sessionService.getDateProchOuverture() |date: 'hh:mm'}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card card-login">
+          <div class="title">
+            {{'getDateProchDeblocage'|translate}}
+          </div>
+          <div class="info">
+           <div> {{this.sessionService.getDateProchOuverture() |date: 'dd-MM-yyyy'}}</div>
+            <div> {{this.sessionService.getDateProchOuverture() |date: 'hh:mm'}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card card-login">
+          <div class="title">
+            {{'getNbrAnomalie'|translate  }}        </div>
+          <div class="info"><br><div>{{this.sessionService.getNbrAnomalie()=="0"? " 0 ":this.sessionService.getNbrAnomalie()}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="block-button">
+    <div class="row">
+      <div class="col-3">
+        <div class="card card-login">
+          <div class="title">
+            {{'Nbr_emp_total'|translate}}
+          </div>
+          <div class="info" >
+            {{this.sessionService.getnbrTotEmp() }}
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card card-login">
+          <div class="title">
+            {{'Nbr_emp_pointe'|translate}}
+          </div>
+          <div class="info" >
+            {{this.sessionService.getNbrTotempPointe() }}
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card card-login">
+          <div class="title">
+            {{'temps_planifie'|translate}}
+          </div>
+          <div class="info" >
+            {{this.sessionService.getTotEmpPlaned() | number:'1.2-2'}} H
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card card-login">
+          <div class="title">
+            {{'PLANNING_PAGE_PRINCIPALE.TOTAL_POINTING'|translate}}
+          </div>
+          <div class="info" >
+            {{this.sessionService.getTotalPointe() | number:'1.2-2'}} H
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--when it's the first time associating a restaurant  -->
+<div *ngIf="this.isFirstTimeAssociation== true" class="container">
+  <div class="center-div">
+    <div class="logo text-center">
+      <img alt="" src="assets/icons/header/Logo_MyRHIS.svg">
+    </div>
+    <div [ngClass]="displayClavier ? 'display__clavier' : 'display__clavier--not'"
+         style=" display: flex; height: 300px;justify-content: center;">
+      <div class="association" style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;">
+        <h4 class="titre-principale-association">{{'OUVERTURE.TITLE' | translate}}</h4>
+        <div class="block__input--center">
+          <p-dropdown (onChange)="setcodeResto()"
+                      (select)="selectedRestaurant.codePointeuse"
+                      [(ngModel)]="selectedRestaurant"
+                      [options]="listRestaurant"
+                      [placeholder]="currentResto()"
+                      filter="true"
+                      optionLabel="libelle"
+                      (onHide)="isDropdownOpen = false"
+                      (onShow)="onDropdownOpen()">
+
+          </p-dropdown>
+
+        </div>
+        <div style="padding: 20px">
+          <button (click)="verifyRestaurant()" button [disabled]="verifybuttondisabled"
+
+                  class="btn button-commun-pointeuse blue-background btn-login"
+                  id="AUTH--btn"
+                  type="button">
+            {{'PLANNING_PAGE_PRINCIPALE.CONFIRM_BUTTON' | translate}}
+          </button>
+        </div>
+      </div>
+      <div *ngIf="!isMobile" class="simple-keyboard"></div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<rhis-pop-up (closeEvent)="closePopup()" [height]="popUpStyle?.height"
+             [showPopUp]="popupSynchronisation" [width]="popUpStyle?.width"
+             title=" {{'POPUP_SYNCHRONISATION.TITLE' |translate}} ">
+  <div *ngIf="!syncEnCours; else ProgressBar;">
+    <form [formGroup]="syncForm">
+      <div class="row">
+        <span class="modal-sync-title">{{'POPUP_SYNCHRONISATION.FORM_TITLE' | translate}}</span>
+      </div>
+      <br>
+      <div class="row synchro-timework style-synchro-generique">
+        <div class="col-5">
+          <div class="row" style="padding-top: 3px;">
+            <div class="col-3">
+              <p-checkbox binary="true" formControlName="syncPointages" id="RESTAURANT_synPointage-checkbox"
+                          name="syncPointages">
+              </p-checkbox>
+            </div>
+            <div class="col-9" style="padding-left: 7px">
+              <label
+                for="RESTAURANT_synPointage-checkbox">{{"POPUP_SYNCHRONISATION.SYNC_POINTAGES" | translate}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-7">
+          <p-calendar [locale]="calendarFr"
+                      [maxDate]="maxDate"
+                      [monthNavigator]="true" [showIcon]="true"
+                      dateFormat="dd/mm/yy" formControlName="dateJournee" id="dateJournee"
+                      inputId="icon"
+                      rhisStyleForm>
+          </p-calendar>
+        </div>
+      </div>
+      <div class="row style-synchro-generique">
+        <div class="col-1">
+          <p-checkbox binary="true" formControlName="syncEmployes" id="RESTAURANT_synEmployee-checkbox"
+                      name="syncEmployes"></p-checkbox>
+        </div>
+        <div class="col-8">
+          <label for="RESTAURANT_synEmployee-checkbox">{{"POPUP_SYNCHRONISATION.SYNC_EMPLOYES" | translate}}
+            / {{"POPUP_SYNCHRONISATION.SYNC_CS" | translate}}</label>
+        </div>
+      </div>
+      <div class="row style-synchro-generique">
+        <div class="col-1">
+          <p-checkbox binary="true" formControlName="syncPlanning" id="RESTAURANT_synPlanning-checkbox"
+                      name="syncPlanning"></p-checkbox>
+        </div>
+        <div class="col-8">
+          <label for="RESTAURANT_synPlanning-checkbox">{{"POPUP_SYNCHRONISATION.SYNC_PLANNING" | translate}}</label>
+        </div>
+      </div>
+      <div class="row style-synchro-generique">
+        <div class="col-1">
+          <p-checkbox binary="true" formControlName="syncParam" id="RESTAURANT_synParam-checkbox"
+                      name="syncParam"></p-checkbox>
+        </div>
+        <div class="col-6">
+          <label for="RESTAURANT_synParam-checkbox">{{"POPUP_SYNCHRONISATION.SYNC_PARAM" | translate}}</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col align-self-end">
+          <button (click)="synchronize()" button
+                  class="btn button-popup-rhis orange-background color-btn-white-rhis btn-save-rhis"
+                  id="RESTAURANT_synchro-btn"
+                  type="button">
+            <span>{{'POPUP_SYNCHRONISATION.SYNCHRONISER' | translate}}</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-template #ProgressBar>
+    <p-progressBar [value]="value"></p-progressBar>
+  </ng-template>
+</rhis-pop-up>
+
+<!-- POP-UP Change Restaurant -->
+<rhis-pop-up (closeEvent)="closePopup()"
+             [height]="popUpStyle?.height"
+             [showPopUp]="displayModal"
+             [width]="popUpStyle?.width"
+             title="{{'CHANGER_RESTAURANT' | translate}}">
+  <label class="section-element-title mt-1 time-red">
+    <img alt="" src="assets/icons/menu/info.png">
+    {{'msg_dissocier'|translate}}
+  </label>
+  <label class="section-element-title mt-4">
+    {{'OUVERTURE.TITLE' | translate}} :
+  </label>
+  <p-dropdown (onChange)="setcodeResto()" (select)="selectedRestaurant.codePointeuse"
+              [(ngModel)]="selectedRestaurant"
+              [options]="listRestaurant"
+              [placeholder]="currentResto()"
+              filter="true"
+              [appendTo]="change_restaurant_container"
+              class="change_restaurant_dropdown"
+              optionLabel="libelle"
+              (onHide)="isDropdownOpen = false"
+              (onShow)="onDropdownOpen()">
+  </p-dropdown>
+
+  <div class="d-flex justify-content-between">
+    <button (click)="displayModal=false"
+            class="btn button-popup-rhis orange-background color-btn-white-rhis btn-save-rhis"
+            type="button">
+      <span>{{'POPUPS.ANNULER' | translate}}</span>
+    </button>
+    <button (click)="verifyRestaurant()"
+            class="btn button-popup-rhis orange-background color-btn-white-rhis btn-save-rhis"
+            type="button"
+            >
+      <span>{{'PLANNING_PAGE_PRINCIPALE.CONFIRM_BUTTON' | translate}}</span>
+    </button>
+  </div>
+</rhis-pop-up>
+<p-blockUI *ngIf="displaySpinner" [blocked]=displaySpinner>
+  <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+    <p-progressSpinner></p-progressSpinner>
+    <span class="text-white">{{"PLANNING_PAGE_PRINCIPALE.LOADING" | translate}}</span>
+  </div>
+</p-blockUI>
+<div *ngIf="this.isFirstTimeAssociation" [ngClass]="{'associate-popup':isAssocieted}">
+  <p-confirmDialog></p-confirmDialog>
+</div>

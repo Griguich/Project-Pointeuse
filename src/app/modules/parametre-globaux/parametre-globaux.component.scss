@@ -1,0 +1,72 @@
+
+.width-7 {
+  width: 20%;
+}
+
+.width-10 {
+  width: 6%;
+}
+
+.width-20 {
+  width: 25%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+
+  &:hover {
+    overflow: visible;
+  }
+}
+
+.width-30 {
+  width: 45%;
+}
+.red{
+  color: red;
+}
+
+.small-rhis {
+  font-size: 11px;
+}
+
+:host ::ng-deep {
+  .table-list p-table .ui-table table .ui-table-thead > tr > th,
+  .table-list p-table .ui-table table .ui-table-tbody > tr > td {
+    &:nth-child(1) {
+      width: 12%;
+      word-wrap: break-word;
+      @media screen and (max-width: 991px) {
+        width: 15%;
+      }
+    }
+
+    &:nth-child(2) {
+      width: 13%;
+      word-wrap: break-word;
+      @media screen and (max-width: 991px) {
+        width: 15%;
+      }
+    }
+
+    &:nth-child(3) {
+      width: 65%;
+      @media screen and (max-width: 991px) {
+        width: 60%;
+      }
+    }
+
+    &:nth-child(4) {
+      width: 10%;
+      text-align: center;
+      padding: 10px 5px;
+    }
+  }
+
+  .parametre-globaux {
+    .ui-dropdown {
+      min-width: 50px;
+      padding: 8px;
+    }
+  }
+}

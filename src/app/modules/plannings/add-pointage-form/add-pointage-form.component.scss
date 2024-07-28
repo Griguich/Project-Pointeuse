@@ -1,0 +1,120 @@
+.add-form-container {
+  font-family: "TT Wellingtons Regular", sans-serif;
+}
+
+.gdh-header-popover {
+  color: #7a7a7a;
+  margin-left: 20px;
+  cursor: pointer;
+
+  img {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+.mrg-top-10 {
+  margin-top: 10px;
+}
+
+.valider-popover {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.popover-title {
+  color: #414141;
+  font-size: 20px;
+}
+
+.popover-hours {
+  color: #9B9B9B;
+  font-size: 18px;
+  height: 23px;
+}
+
+.validate-btn {
+  height: 38px;
+  width: 122px;
+  border-radius: 5px;
+  background-color: #385FE3;
+
+  span {
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+}
+
+:host ::ng-deep {
+  p-calendar {
+    .ui-datepicker {
+      font-size: 9px;
+
+      .ui-timepicker > div {
+        margin-left: unset;
+      }
+    }
+
+    .ui-calendar-timeonly .ui-inputtext {
+      text-align: center;
+    }
+  }
+}
+
+.padding-bottom-calendar {
+  padding-bottom: 10px;
+}
+
+.select-list {
+  height: 51px;
+}
+
+.hours-error {
+  color: red;
+}
+
+.error-text {
+  position: absolute;
+  top: 45px;
+  font-size: small;
+}
+
+.hour-pointage {
+  ul {
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+    border: none;
+  }
+
+  .simple-keyboard, .simple-keyboard2 {
+    width: 200px;
+    position: absolute;
+    z-index: 9;
+    box-shadow: 0 0 15px #d6d6d6;
+    background-color: #d4d1ca !important;
+  }
+  .simple-keyboard {
+    left: -55px;
+  }
+  .simple-keyboard2 {
+    left: 30px;
+  }
+}
+
+:host ::ng-deep {
+  .hg-theme-default .hg-row > div {
+    color: #414141;
+  }
+
+  .hg-theme-default .hg-row > div[data-skbtn=":"] {
+    background-color: #ff9b42 !important;
+    color: #414141;
+    font-weight: bold;
+  }
+}

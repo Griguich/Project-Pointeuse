@@ -1,0 +1,1171 @@
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/************************************** Call all CSS MODULE ************************************/
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+@import 'styles/generique';
+@import 'simple-keyboard/build/css/index.css';
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/***************************************** Font Family *****************************************/
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+@font-face {
+  font-family: "TT Wellingtons Medium";
+  src: url("assets/fonts/TT_Wellingtons_Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "digital";
+  src: url("assets/fonts/digital.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "TT Wellingtons Regular";
+  src: url("assets/fonts/TT_Wellingtons_Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "TT Wellingtons DemiBold";
+  src: url("assets/fonts/TT_Wellingtons_DemiBold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "TT Wellingtons Bold";
+  src: url("assets/fonts/TT_Wellingtons_Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "TT Wellingtons Light";
+  src: url("assets/fonts/TT_Wellingtons_Light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "TT Wellingtons Thin";
+  src: url("assets/fonts/TT_Wellingtons_Thin.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Calibri Regular";
+  src: url("assets/fonts/Calibri_Regular.ttf") format("opentype");
+}
+
+// Disable web page navigation on swipe(back and forward)
+html, body {
+  overscroll-behavior-x: none;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/********************************* STYLE GENERALE APPLICATION **********************************/
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+//TODO bloc à supprimer aprés la finalisaiton de pointing et login
+.btn.button-commun-pointeuse {
+  float: right;
+  color: $color--default;
+  text-transform: uppercase;
+  font-family: "TT Wellingtons DemiBold", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  letter-spacing: 1.2px;
+  padding: 16px 18px;
+  //margin-left: 10px;
+  background: $color-blue;
+  box-shadow: 0 0.5rem 1rem rgb(55 55 55 / 15%);
+  @media screen and (max-width: 991px) {
+    font-size: 11px;
+  }
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.btn.buttonadmin {
+  float: right;
+  color: $color--default;
+  font-family: "TT Wellingtons DemiBold", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  letter-spacing: 1.2px;
+  padding: 10px;
+  margin-right: 10px;
+  //margin-left: 10px;
+  background: $color-blue;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 65%);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.btn.buttonAssociation {
+  float: right;
+  color: $color--default;
+  text-transform: inherit;
+  font-family: "TT Wellingtons DemiBold", sans-serif;
+  font-size: 14px;
+
+  border-radius: 5px;
+  padding: 10px 1px;
+  //margin-left: 10px;
+  background: $color-blue;
+  box-shadow: 0 0.5rem 1rem rgb(55 55 55 / 15%);
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.btn.button-commun-pointeuse {
+  float: none;
+}
+
+.styleLI {
+  text-align: left;
+
+  .li {
+    font-size: 16px;
+    margin: 10px;
+  }
+
+  .strong {
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
+  }
+}
+.pi {
+  color: #878787;
+}
+
+.block-button-rhis {
+  margin-top: 35px;
+}
+
+.block__input--center {
+  margin: 0 auto;
+
+  .block-input {
+    height: 51px;
+    width: 100%;
+    font-family: "TT Wellingtons DemiBold";
+    border-radius: 10px;
+    background-color: #fff;
+    border: 1px solid #d1d1d9;
+    padding: 17px;
+    text-align: left;
+
+    &::placeholder {
+      font-size: 18px;
+      font-family: "TT Wellingtons DemiBold";
+    }
+  }
+}
+
+/*********************************************************************************************************/
+/*--------------------------------------------- BLOC PLANNING ------------------------------------------*/
+/*_____________________________________________________________________________________________________*/
+
+
+/*****************************************************/
+/**************    IMAGE USER   **********************/
+/*****************************************************/
+.img-profil__photo32 {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #1d7bd9;
+  line-height: 35px;
+  text-align: center;
+  margin-bottom: 0;
+  color: #ffffff;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.grid-user {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  align-items: center;
+  margin: 5px;
+}
+
+/*************************************************/
+/************** PAGINATION *****************/
+/*************************************************/
+
+.dataTables_paginate .paginate_button {
+  box-sizing: border-box;
+  display: inline-block;
+  min-width: 1.1em;
+  padding: 5px;
+  margin-left: 3px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  color: #67757c;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-size: 12px;
+  font-family: sans-serif;
+}
+
+.dataTables_paginate .paginate_button {
+  border: solid 1px #ced4da;
+  border-radius: .25rem;
+}
+
+.dataTables_paginate .paginate_button:hover {
+  background-color: #fff
+}
+
+.dataTables_paginate .paginate_button.current, .dataTables_paginate .paginate_button.current:hover {
+  color: #fff;
+  border: 1px solid #1d7bd9;
+  background-color: #1d7bd9;
+}
+
+.ui-table .ui-sortable-column .ui-sortable-column-icon {
+  color: #848484 !important;
+}
+
+/**************************************/
+/******** POINTAGES *******/
+/**************************************/
+.rectangle {
+  box-sizing: border-box;
+  width: 103px;
+  border: 1px solid #C8C7C4;
+  border-radius: 3px;
+  margin: 1px;
+  display: inline-block;
+}
+
+.oval {
+  height: 13px;
+  line-height: 14px;
+  width: 13px;
+  display: inline-block;
+  border-radius: 50%;
+  font-size: 7px;
+  text-align: center;
+  color: #ffffff;
+  margin: 2px;
+  font-family: "TT Wellingtons Medium", sans-serif;
+  font-weight: bold;
+}
+
+.oval-absence {
+  background-color: #e80000;
+}
+
+.oval-pointage {
+  background-color: #C8C7C4;
+}
+
+.pointage-part {
+  display: inline-block;
+  height: 14px;
+  width: 80px;
+  font-family: "TT Wellingtons";
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 14px;
+}
+
+.time-green {
+  color: #2DC76D !important;
+  display: inline-block;
+}
+
+.time-red {
+  color: #e80000 !important;
+  display: inline-block;
+}
+
+.time-orange {
+  color: #ffac00 !important;
+  display: inline-block;
+}
+
+.time-gris {
+  margin-left: 2px;
+  margin-right: 2px;
+  color: #7e7e7e !important;
+  display: inline-block;
+}
+
+.time-white {
+  margin-left: 2px;
+  margin-right: 2px;
+  color: #fff !important;
+  display: inline-block;
+}
+
+/******************* triangle popip ********************/
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+
+  border-top: 20px solid #f00;
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 60px solid transparent;
+  border-bottom: 60px solid transparent;
+  border-left: 60px solid green;
+}
+
+.arrow-left {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid blue;
+}
+
+.arrow-right.besoin-shift {
+  border: none;
+}
+
+.ui-calendar {
+  width: 100%;
+
+  .ui-inputtext {
+    height: 51px;
+    width: 100%;
+    border: 1px solid #C8C7C4;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 17px;
+    margin-top: 10px;
+    padding: 17px !important;
+    outline: none;
+  }
+}
+
+.button-popup-rhis {
+  margin-top: 50px;
+  float: left;
+  margin-left: 0;
+}
+
+.button-popup-rhis.btn.btn-save-rhis {
+  float: right;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "TT Wellingtons DemiBold", sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 5px;
+  letter-spacing: 1.2px;
+  padding: 10px 18px;
+}
+
+.btn.button-popup-rhis.btn-cancel-rhis {
+  float: left;
+  margin-left: 0;
+}
+
+.btn.color-btn-white-rhis {
+  color: #fff;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/**************************************** TABLE ANOMALIE ***************************************/
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.table-list.bg-gris-avec-border.perso-table-popup-rhis.table-anomalie {
+  p-table {
+    .ui-table {
+      table {
+        .ui-table-thead {
+          > tr {
+            > th {
+              text-align: left;
+
+              &:first-child {
+                padding-left: 10px !important;
+                width: 30%;
+                word-wrap: break-word;
+                padding-right: 10px;
+              }
+            }
+          }
+        }
+
+        .ui-table-tbody {
+          > tr {
+            > td:nth-child(1) {
+              padding-left: 10px !important;
+              width: 30%;
+              word-wrap: break-word;
+              padding-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.pop-up-container-rhis .content {
+  border-radius: 20px;
+  width: 550px;
+  @media screen and (max-width: 991px) {
+    width: 450px;
+  }
+  @media screen and (max-width: 767px) {
+    width: 350px;
+    padding: 0;
+  }
+}
+
+.table-list.bg-gris-avec-border.perso-table-popup-rhis {
+  p-table {
+    .ui-table {
+      table {
+        .ui-table-tbody > tr > td {
+          padding: 12px 0;
+          text-align: left;
+
+          &:nth-child(1) {
+            padding: 12px 0 12px 28px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.btn.orange-background {
+  background-color: #FF9B42;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/************************************* Connection & Login **************************************/
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+h6.titre-principale-auth {
+  font-family: "TT Wellingtons Medium";
+  color: #9B9B9B;
+  text-align: center;
+  margin: 30px auto;
+}
+
+.block-column-center-pointeuse {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+}
+
+/******************************************************/
+/*******             POPOVER                 **********/
+/******************************************************/
+
+.ui-overlaypanel {
+  max-width: 350px !important;
+  width: 350px !important;
+}
+
+.caret_right:before, .caret_right:after {
+  left: 23.25em !important;
+}
+
+.caret_left:before, .caret_left:after {
+  left: 1.25em !important;
+}
+
+/******************************************************/
+/*******             DROP DOWN               **********/
+/******************************************************/
+
+.ui-dropdown {
+  width: 100% !important;
+  height: 51px;
+  border: 1px solid #C8C7C4 !important;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 17px;
+  padding: 17px;
+  outline: none;
+
+  .ui-dropdown-trigger {
+    font-size: 0.6em;
+    margin-right: 8px;
+    color: rgba(65, 65, 65, 0.9) !important;
+  }
+
+  .ui-dropdown-label {
+    position: relative;
+    bottom: 7px;
+  }
+
+  .ui-dropdown-item, .ui-dropdown-label {
+    color: #414141;
+    font-family: "TT Wellingtons Medium";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    @media screen and (max-width: 991px) {
+      font-size: 12px;
+    }
+  }
+}
+
+.has-error {
+  border-color: #ff5454 !important;
+}
+
+.synchro-timework {
+  .ui-calendar .ui-inputtext {
+    height: 30px;
+    width: 65%;
+    margin-top: -10px;
+  }
+
+  .ui-datepicker:not(.ui-datepicker-inline) {
+    left: -32px !important;
+  }
+
+  .ui-datepicker {
+    padding: 5px;
+
+    table th {
+      padding: 0;
+    }
+
+    table td > a,
+    table td > span,
+    table td {
+      padding: 0;
+    }
+  }
+}
+
+.ui-overlaypanel.custom-theme {
+  transform: translate(-320px, 0px) !important;
+}
+
+.custom-theme.ui-overlaypanel:after, .custom-theme.ui-overlaypanel:before {
+  bottom: 100%;
+  left: 15.25em;
+}
+
+/******************************************************/
+/*******            OFFLINE MODE               ********/
+/******************************************************/
+
+.offline-libel {
+  color: #FE9A42;
+  font-weight: 400;
+  font-size: 22px;
+  padding-left: 5px;
+  font-family: "TT Wellingtons Medium", sans-serif;
+}
+
+/******************************************************/
+/*******            PAGE CODE RESTO            ********/
+/******************************************************/
+
+.connexion__code-restaurant {
+  padding: 20px;
+  text-align: center;
+
+  .block__input--center {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+}
+
+h4.titre-principale-auth {
+  font-family: "TT Wellingtons Medium";
+  color: #ffffff;
+  padding-right: 30px;
+  padding-left: 30PX;
+  PADDING-TOP: 30px;
+  margin-bottom: 30px;
+}
+h4.titre-principale-association {
+  font-family: "TT Wellingtons Medium";
+  color: #000000;
+  padding-right: 30px;
+  padding-left: 30PX;
+  PADDING-TOP: 30px;
+  margin-bottom: 30px;
+}
+.dropdownClass{
+  width: auto;
+}
+.assocBtn{
+
+.dropdownClass {
+  width: auto;
+}
+
+.assocBtn {
+
+}
+
+.association {
+  margin: 10px;
+  display: inline-block;
+  border-radius: 20px;
+
+}
+
+.associationDialogue {
+  margin: 10px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+
+.divbtnEtatPointeuse {
+  padding: 20px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+}
+.association{
+  margin: 10px;
+  display: inline-block;
+  border-radius: 20px;
+
+  background-color: #ffffff;
+}
+.associationDialogue{
+  margin: 10px;
+  display: inline-block;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+.ui-dialog .ui-dialog-content {
+  background-color: #ffffff;
+  color: #333333;
+  border: 0 solid #c8c8c8;
+  padding: 0.571em 1em;
+}
+
+.ui-widget {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.color-text {
+  color: #414141;
+}
+
+.ui-datepicker table {
+  margin: 0 !important;
+}
+
+.ui-datepicker table td {
+  padding: 0 !important;
+}
+
+.name-employee {
+  height: 32px;
+  color: #414141;
+  font-family: "TT Wellingtons Medium", sans-serif;
+  font-size: 14px;
+  line-height: 14px;;
+  text-align: left;
+  display: grid;
+  grid-gap: 0;
+  grid-template-rows: repeat(2, 20px);
+  grid-template-columns: 1fr 25px;
+  max-width: 130px;
+
+  .badge-planning {
+    color: #d57e37;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 24px;
+    float: right;
+    justify-self: center;
+    grid-area: 1 / 2 / 3 / 3;
+  }
+
+  .empl-prenom {
+    grid-area: 1 / 1 / 2 / 2;
+    text-transform: uppercase;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 14px;
+    height: 14px;
+    width: 102px;
+  }
+
+  .dialog-radius {
+    border-radius: 20px;
+  }
+  .empl-nom {
+    grid-area: 2 / 1 / 3 / 2;
+    width: 102px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 14px;
+  }
+}
+
+/********************************************************************************************************/
+/***********************        _*_START_*_ INTEGRATION Page Live / Clock       ************************/
+/************************/
+///////////////////////////////////////////////////////**********************/
+
+.general-contenu {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-rows: 80px auto;
+  grid-template-columns: 1fr;
+  height: 100%;
+
+  &--header {
+    display: grid;
+    grid-gap: 0;
+    grid-template-rows: 70px;
+    grid-template-columns: 70px repeat(3, 1fr);
+    align-items: center;
+    background: #fff;
+    width: 100%;
+    z-index: 99;
+    font-family: "TT Wellingtons DemiBold", sans-serif;
+    box-shadow: 0 0.5rem 1.2rem rgb(0 0 0 / 20%);
+    padding: 5px;
+    position: fixed;
+
+    .restaurant-name {
+      h1.title {
+        color: $color-title;
+        font-family: "TT Wellingtons Medium", sans-serif !important;
+        font-size: 14px;
+        font-weight: 500;
+        max-width: 150px;
+        text-align: left;
+        line-height: 20px;
+        margin-bottom: 0;
+      }
+    }
+
+    .date {
+      font-size: 18px;
+      line-height: 22px;
+      text-align: center;
+      font-weight: bold;
+      font-family: "TT Wellingtons Medium", sans-serif;
+      color: $color--text;
+      padding-right: 18%;
+    }
+  }
+
+  .content-live {
+    box-shadow: 0 0.5rem 1.2rem rgb(0 0 0 / 20%);
+    top: 90px;
+    position: relative;
+    background: #fff;
+    padding: 1% 15px;
+    height: 89vh;
+
+    .content-planning {
+      padding: 15px;
+    }
+
+    .content-planning.clock {
+      width: 80%;
+      margin: 0 10%;
+      height: 83vh;
+    }
+  }
+
+  .footer__badge {
+    position: absolute;
+    bottom: 0;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "TT Wellingtons Medium", sans-serif;
+    color: #414141;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    padding-bottom: 15px;
+  }
+}
+
+#codeBadge {
+  width: 100%;
+  height: 51px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #d1d1d9;
+  font-family: "TT Wellingtons Medium", sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  max-width: 180px;
+  text-align: center;
+}
+
+/********************************************************************************************************/
+/************************        _*_END_*_ INTEGRATION Page Live / Clock       *************************/
+/************************/
+///////////////////////////////////////////////////////**********************/
+
+/********************************************************************************************************/
+/******************        _*_START_*_ INTEGRATION Page planning / list employee      ******************/
+/************************/
+///////////////////////////////////////////////////////**********************/
+
+.day-hour-table-row {
+  font-family: "TT Wellingtons Medium", sans-serif;
+  cursor: pointer;
+  font-size: 14px;
+  color: #9B9B9B;
+  background-color: #f1f1f1 !important;
+  text-align: center;
+
+  &:hover {
+    background-color: #efefef !important;
+  }
+
+  td {
+    font-weight: 500;
+    line-height: 20px;
+    border: none !important;
+    padding: 10px 0 !important;
+    vertical-align: top !important;
+  }
+
+  td {
+    border-left: 1pt dotted #cccccc !important;
+
+    &:nth-child(odd) {
+      border-left: 1pt dotted #999999 !important;
+    }
+
+    &:nth-child(1), &:nth-child(2) {
+      border: none !important;
+    }
+  }
+
+  .last-half-hour {
+    border-right: 1pt dotted #999999 !important;
+  }
+}
+
+/********************************************************************************************************/
+/******************        _*_END_*_ INTEGRATION Page planning / list employee      ********************/
+/************************/
+///////////////////////////////////////////////////////**********************/
+
+.logo {
+  img {
+    width: 55px;
+    @media screen and (max-width: 991px) {
+      width: 50px;
+    }
+  }
+
+  td {
+    font-weight: 500;
+    line-height: 20px;
+    border: none !important;
+    padding: 10px 0 !important;
+    vertical-align: top !important;
+  }
+
+  td {
+    border-left: 1pt dotted #cccccc !important;
+
+    &:nth-child(odd) {
+      border-left: 1pt dotted #999999 !important;
+    }
+
+    &:nth-child(1), &:nth-child(2) {
+      border: none !important;
+    }
+  }
+
+  .last-half-hour {
+    border-right: 1pt dotted #999999 !important;
+  }
+}
+
+/********************************************************************************************************/
+/******************        _*_END_*_ INTEGRATION Page planning / list employee      ********************/
+/************************/
+///////////////////////////////////////////////////////**********************/
+
+.logo {
+  img {
+    width: 55px;
+    @media screen and (max-width: 767px) {
+      width: 50px;
+    }
+  }
+}
+
+.ui-button {
+  background-color: #FF9B42 !important;
+  border: 1px solid #FF9B42 !important;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "TT Wellingtons DemiBold", sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 5px;
+  letter-spacing: 1.2px;
+  padding: 10px 18px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 1.5;
+  -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.ui-button.ui-calendar-button {
+  background-color: #fff !important;
+  border: 1px solid #C8C7C4 !important;
+}
+
+.ui-dialog-footer .ui-button .pi {
+  color: #fff;
+}
+
+.ui-button.ui-button-text-icon-left:nth-child(1) {
+  //margin-left: 50% !important;
+  //transform: translate(-50%, 0%);
+  //float: left;
+  //.ui-button-icon-left {
+  //  display: none;
+  //}
+  //.ui-button-text {
+  //  margin-left: 0;
+  //}
+  float: right;
+}
+
+.ui-button.ui-button-text-icon-left:nth-child(2) {
+  float: left;
+  //display: none;
+}
+
+.ui-button.ui-button-text-icon-left .ui-button-text {
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "TT Wellingtons DemiBold", sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 5px;
+  letter-spacing: 1.2px;
+  padding: 10px 18px !important;
+  margin-left: 10px;
+}
+
+.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon {
+  border: 1px solid #848484 !important;
+  border-radius: 50%;
+  width: 26px;
+  height: 28px;
+  padding-top: 3px !important;
+  padding-left: 2px !important;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+  padding: 0 !important;
+  padding-bottom: 20px !important;
+}
+
+.rotate {
+  animation: rotation 5s;
+}
+
+.linear {
+  animation-timing-function: linear;
+}
+
+.infinite {
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.smallSize-menu {
+
+  input#menu {
+    display: none;
+  }
+
+  .icon {
+    background: #FFF;
+    cursor: pointer;
+    display: block;
+    height: 24px;
+    padding: 16px;
+    width: 24px;
+  }
+
+  label.icon {
+    position: fixed;
+    z-index: 200;
+  }
+
+  .icon .menu,
+  .icon .menu::before,
+  .icon .menu::after {
+    background: #9FB1BD;
+    content: '';
+    display: block;
+    height: 2px;
+    position: absolute;
+    transition: background ease .3s, top ease .3s .3s, transform ease .3s;
+    width: 20px;
+  }
+
+  .icon:hover .menu,
+  .icon:hover .menu::before,
+  .icon:hover .menu::after {
+    background: #47B74B;
+  }
+
+  .icon .menu {
+    left: 18px;
+    top: 27px;
+  }
+
+  .icon .menu::before {
+    top: -6px;
+  }
+
+  .icon .menu::after {
+    top: 6px;
+  }
+
+  #menu:checked + .icon .menu {
+    background: transparent;
+  }
+
+  #menu:checked + .icon .menu::before {
+    transform: rotate(45deg);
+  }
+
+  #menu:checked + .icon .menu::after {
+    transform: rotate(-45deg);
+  }
+
+  #menu:checked + .icon .menu::before,
+  #menu:checked + .icon .menu::after {
+    top: 0;
+    transition: top ease .3s, transform ease .3s .3s;
+  }
+
+  nav {
+    background: #FFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+    height: 100vh;
+    padding-top: 60px;
+    position: fixed;
+    transition: width ease .6s;
+    width: 60px;
+    z-index: 100;
+
+    overflow: hidden;
+  }
+
+  #menu:checked ~ nav {
+    width: 200px;
+  }
+
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav li {
+    cursor: pointer;
+    display: block;
+    line-height: 60px;
+    padding-left: 16px;
+    white-space: nowrap;
+  }
+}
+
+.ui-dialog .ui-dialog-footer button {
+  margin: 0 !important;
+}
+
+.ui-chkbox .ui-chkbox-box.ui-state-active {
+  border: 1px solid #ccc;
+  background: none !important;
+}
+
+nav:not(.smallSize-menu) ul {
+  li#MENU_Employee-Quitter-item,
+  li#MENU_Technicien-Quitter-item,
+  li#MENU_Manager-Quitter-item {
+    position: absolute;
+    bottom: 85px;
+    left: 25px;
+    border: none;
+  }
+}
+
+/****************************** LOGIN PAGE ***************************/
+
+.change_restaurant_container {
+  .ui-dropdown-panel.ui-widget.ui-widget-content.ui-corner-all.ui-shadow {
+    width: 360px !important;
+  }
+}
+

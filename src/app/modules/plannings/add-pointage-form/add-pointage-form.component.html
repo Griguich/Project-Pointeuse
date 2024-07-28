@@ -1,0 +1,116 @@
+<div class="add-form-container position-relative mt-2">
+  <div class="row d-flex align-items-center mb-5">
+    <div class="col-md-4">
+      <b class="popover-title">{{"PLANNING_PAGE_PRINCIPALE.POPUP_HEADER" | translate}}</b>
+    </div>
+    <div class="col-md-8 d-flex align-items-center justify-content-end">
+      <div class="popover-hours d-flex align-items-center"
+           [ngClass]="{'hours-error': pointage?.error && (selectedStatus?.code != 'deleted')}">
+
+        <div (rhisClickOutside)="closeStartHourTimer(keyboardInput)"
+             *ngIf="!isAcheval"
+             [isClickOutsideEmittionEnabled]="isClickOutsideListenerEnabledForStartTimeInput"
+             [skipFirstClick]="true" style="text-align:center" class="hour-pointage"
+             id="POINTAGE_startHour">
+          <input #keyboardInput
+                 (click)="this.instantiateKeybord('simple-keyboard', 'onKeyPress', 1);"
+                 class="input"
+                 appHourFormat
+                 type="text"
+                 inputmode='none'
+
+                 [ngClass]="{'hours-error': pointage?.error && (selectedStatus?.code != 'deleted')}"
+                 [ngModel]="startHour | date: 'HH:mm'"
+                 (keydown.enter)="closeStartHourTimer(keyboardInput)"
+          />
+          <div *ngIf="displayFirstClavier" class="simple-keyboard">
+          </div>
+        </div>
+
+        <div
+             *ngIf="isAcheval"
+            style="text-align:center" class="hour-pointage"
+             id="POINTAGE_startHour_2">
+          <input #keyboardInput
+                 (click)="this.instantiateKeybord('simple-keyboard', 'onKeyPress', 1);"
+                 class="input"
+                 appHourFormat
+                 type="text"
+                 inputmode='none'
+                 [ngClass]="{'hours-error': pointage?.error && (selectedStatus?.code != 'deleted')}"
+                 [ngModel]="startHour | date: 'HH:mm'"
+                 readonly
+          />
+          <div *ngIf="displayFirstClavier" class="simple-keyboard">
+          </div>
+        </div>
+        <div>-</div>
+
+        <div style="text-align:center" (rhisClickOutside)="closeEndHourTimer(secondKeyboardInput)"
+             [skipFirstClick]="true" class="hour-pointage ml-3"
+             [isClickOutsideEmittionEnabled]="isClickOutsideListenerEnabledForEndTimeInput"
+             id="POINTAGE_endHour">
+          <input #secondKeyboardInput
+                 (click)="this.instantiateKeybord('simple-keyboard2','onKeyPress1',2);"
+                 class="input"
+                 appHourFormat
+                 type="text"
+                 inputmode='none'
+
+                 (focusout)="this.alreadyRun = false;"
+                 [ngClass]="{'hours-error': pointage?.error && (selectedStatus?.code != 'deleted')}"
+                 [ngModel]="endHour ? (endHour | date: 'HH:mm'): ''"
+                 (keydown.enter)="closeEndHourTimer(secondKeyboardInput)"/>
+          <div *ngIf="displaySecondClavier" (rhisClickOutside)="closeEndHourTimer(secondKeyboardInput)"
+               [skipFirstClick]="true" class="simple-keyboard2">
+          </div>
+        </div>
+      </div>
+      <span class="gdh-header-popover" (click)="hidePopPup()">
+          <img src="assets/icons/pointage/Btn_Close.svg" alt=""/>
+      </span>
+    </div>
+  </div>
+  <span *ngIf="pointage?.error && (selectedStatus?.code != 'deleted')"
+        [ngClass]="{'hours-error error-text': pointage?.error}">{{"PLANNING_PAGE_PRINCIPALE.HOUR_ERROR_MESSAGE" | translate}}</span>
+  <div class="row mrg-top-10">
+    <div class="col-md-12">
+      <p-dropdown [options]="statuses"
+                  dataKey="code"
+                  optionLabel="value"
+                  [autoDisplayFirst]="false"
+                  (ngModelChange)="setListOfTypesBasedOnStatusFilter($event)"
+                  [(ngModel)]="selectedStatus"
+                  rhisStyleForm
+                  [hasError]="(selectedStatus == undefined) && isSubmitted"
+                  selector=".ui-dropdown"
+                  id="POINTAGE_statutPointage-btn"
+      ></p-dropdown>
+    </div>
+  </div>
+
+  <div class="row mrg-top-10">
+    <div class="col-md-12">
+      <p-dropdown [options]="types"
+                  dataKey="libelle"
+                  optionLabel="libelle"
+                  [autoDisplayFirst]="false"
+                  [(ngModel)]="selectedType"
+                  rhisStyleForm
+                  [hasError]="(!selectedType) && isSubmitted && (selectedStatus?.code != 'deleted')"
+                  selector=".ui-dropdown"
+                  id="POINTAGE_typePointage-btn"
+      ></p-dropdown>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 valider-popover">
+      <button type="button" (click)="submit()"
+              class="btn btn-primary validate-btn"
+              id="POINTAGE_validete-btn" [disabled]="addClickedBtn">
+        <span>{{"PLANNING_PAGE_PRINCIPALE.UPDATE_BUTTON" | translate | uppercase}}</span>
+      </button>
+    </div>
+  </div>
+</div>

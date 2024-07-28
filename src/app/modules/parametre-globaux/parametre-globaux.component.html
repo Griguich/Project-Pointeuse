@@ -1,0 +1,131 @@
+<div class="block__contenu-page parametre-globaux">
+  <div class="block__contenu-page--top"
+       (rhisHeightScrollableSection)="heightInterface = ($event + 'px')"
+       [offset]="240">
+    <h2 class="block__contenu-page--top-titre">{{'PARAMS_GLOBAL.PARAMETRES' | translate}}</h2>
+    <div class="block__contenu-page--top-icons list-icons">
+        <button class="btn button-commun-pointeuse blue-background"
+                type="button"
+                *ngIf="listeParametres?.length" (click)="saveUpdate()">
+          <span>{{'BUTTON.SAVE' | translate}}</span>
+        </button>
+    </div>
+  </div>
+  <div class="block__contenu-page-table">
+    <div class="table-list "
+         *ngIf="listeParametres?.length">
+      <p-table [value]="listeParametres"
+               (onSort)="sortRows($event)"
+               [scrollable]="true"
+               [scrollHeight]="heightInterface"
+               [columns]="header"
+               [responsive]="false">
+        <ng-template pTemplate="header" let-columns stickyHeader stickyClass="stickyHeader">
+          <tr class="header-row">
+            <th *ngFor="let col of columns">
+              {{col?.title}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template let-i="rowIndex" pTemplate="body" let-param>
+          <tr class="table-row">
+            <td>
+              <div class="td-container td-left-border">
+                {{param?.rubrique}}
+              </div>
+            </td>
+            <td>
+              <div class="td-container">
+                {{param?.param}}
+              </div>
+            </td>
+            <td>
+              <div class="td-container">
+                {{param?.description}}
+              </div>
+            </td>
+            <td *ngIf="param?.booleanValue" (click)="setBooleanValue(param)" class="width-10">
+              <div class="td-container td-right-border">
+                <i *ngIf="param?.valeur === 'true'" class="pi pi-check"></i>
+              </div>
+            </td>
+            <td *ngIf="param?.isTime" pEditableColumn class="width-10">
+              <div class="td-container td-right-border">
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <p-calendar
+                      [(ngModel)]="param.valeur"
+                      [timeOnly]="true">
+                    </p-calendar>
+                  </ng-template>
+                  <ng-template pTemplate="output" class="text-center">
+                    {{param?.valeur | date:'HH:mm' }}
+                  </ng-template>
+                </p-cellEditor>
+              </div>
+            </td>
+            <td *ngIf="param?.param === 'LANGUE_SONS' || param?.param === 'LANGUE_AFFICHAGE'" pEditableColumn>
+              <div class="td-container td-right-border">
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <p-dropdown  [(ngModel)]="param.valeur"  [options]="languesList" class="drop-down-general">
+                    </p-dropdown>
+                  </ng-template>
+                  <ng-template pTemplate="output" class="text-center">
+                    {{param?.valeur}}
+                  </ng-template>
+                </p-cellEditor>
+              </div>
+            </td>
+            <td *ngIf=" param?.param === 'Affichage_date'" pEditableColumn style="width: 220px">
+              <div class="td-container td-right-border">
+                <p-cellEditor>
+                 <ng-template pTemplate="input">
+                    <p-dropdown  [(ngModel)]="param.valeur" [options]="option_Affichage_date" (onChange)="getSelectedOptionIndex($event)" class="drop-down-general">
+                    </p-dropdown>
+                  </ng-template>
+                  <ng-template pTemplate="output" class="text-center">
+                    {{param?.valeur}}
+                  </ng-template>
+                </p-cellEditor>
+              </div>
+            </td>
+            <td *ngIf="!param?.isTime && !param?.booleanValue && param?.param !== 'LANGUE_SONS' && param?.param !== 'LANGUE_AFFICHAGE'&& param?.param !== 'Affichage_date'" pEditableColumn class="width-10">
+              <div class="td-container td-right-border">
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input *ngIf="!param?.floatValue" type="text" rhisIntegerNumbers pInputText
+                           style="text-align: center;"
+                           [(ngModel)]="param.valeur"
+                           (input)="detectChanges(param)">
+                    <input *ngIf="param?.floatValue" type="text" rhisTwoDigitDecimaNumber pInputText
+                           [(ngModel)]="param.valeur"
+                           style="text-align: center;"
+                           (input)="detectChanges(param)">
+                  </ng-template>
+                  <ng-template pTemplate="output" class="text-center">
+                    {{param?.valeur}}
+                    <div *ngIf="param?.param === PALIER1_CODE_NAME && param?.wrongValue" class="red small-rhis">
+                      {{'PARAMS_GLOBAL.VALEUR_ATTENDUE_LESS' | translate}} {{getOtherParamValue(PALIER1_CODE_NAME)}}
+                    </div>
+                    <div *ngIf="param?.param === PALIER2_CODE_NAME && param?.wrongValue" class="red small-rhis">
+                      {{'PARAMS_GLOBAL.VALEUR_ATTENDUE_SUP_EQUAL' | translate}}
+                      {{getOtherParamValue(PALIER2_CODE_NAME)}}
+                    </div>
+                    <div *ngIf="param?.param === JOUR_DECALAGE_CODE_NAME && param?.wrongValue" class="red small-rhis">
+                      {{'PARAMS_GLOBAL.VALEUR_ATTENDUE_BETWEEN_0_6' | translate}}
+                    </div>
+                    <div *ngIf="param?.param === MIN_DAY_REF_CODE_NAME && param?.wrongValue" class="red small-rhis">
+                      {{'PARAMS_GLOBAL.VALEUR_ATTENDUE_SUP_0' | translate}}
+                    </div>
+                  </ng-template>
+                </p-cellEditor>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>

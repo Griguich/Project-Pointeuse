@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>82D9D976-9A4A-4DF9-B43F-92FE6CE31E2B</title>
+    <desc>Created with sketchtool.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01-Accueil" transform="translate(-983.000000, -25.000000)">
+            <g id="Bar_Header" transform="translate(74.000000, 0.000000)">
+                <g id="ico_Alertes" transform="translate(909.000000, 25.000000)">
+                    <path d="M17.505,15.862 C17.7073493,16.9030393 18.1320192,17.8881371 18.75,18.75 L0.75,18.75 C0.75,18.75 2.25,16.421 2.25,10.5 C2.25,6.35786438 5.60786438,3 9.75,3 L9.75,0.75" id="Path" stroke="#AFA899" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <circle id="Oval" fill="#FF9B42" cx="17.25" cy="6.75" r="6"></circle>
+                    <path d="M7.748,21.75 C8.00888598,22.6387095 8.82428944,23.2491541 9.7505,23.2491541 C10.6767106,23.2491541 11.492114,22.6387095 11.753,21.75" id="Path" stroke="#AFA899" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

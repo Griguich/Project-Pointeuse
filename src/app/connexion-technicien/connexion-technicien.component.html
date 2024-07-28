@@ -1,0 +1,80 @@
+<div class="pointeuse-generalise">
+  <div class="block-auth--bg-color">
+  </div>
+  <div class="bloc-login__general technecien">
+    <div class="logo text-center">
+      <img alt="" src="assets/icons/header/Logo_MyRHIS.svg">
+    </div>
+    <div>
+      <h6 class="titre-principale-auth">{{'CONNECTION.TITLE' | translate}}</h6>
+      <div>
+        <div class="titre-principale-auth__form">
+          <form [formGroup]="loginForm" name="form">
+            <div class="bloc-login__form email">
+              <label>{{'CONNECTION.EMAIL' | translate}} : </label>
+              <div class="block__input--center">
+                <input InputText class="block-input"
+                       formControlName="email"
+                       pInputText required="true"
+                       id="mail"
+                       type="text"
+                       inputmode='none'
+                       [(ngModel)]="inputs.mail"
+                       (focus)="onInputFocus($event)"
+                       (change)="onInputChange($event)"
+                       (click)="displayKeyboardInput()"/>
+                <br>
+                <span *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched || champObligatoireEmail"
+                      class="form-item-error red small-rhis ml-1"
+                      id="AUTH-email-error">
+                {{"LOGIN.emailError" | translate}}</span>
+              </div>
+            </div>
+            <div class="bloc-login__form mot-de-passe">
+              <label>{{'CONNECTION.MOT_DE_PASSE' | translate}}</label>
+              <div class="block__input--center">
+                <input InputText class="block-input"
+                       formControlName="password"
+                       id="pwd"
+                       inputmode='none'
+                       pInputText required="true"
+                       type="password"
+                       [(ngModel)]="inputs.pwd"
+                       (focus)="onInputFocus($event)"
+                       (change)="onInputChange($event)"
+                       (click)="displayKeyboardInput()"/>
+                <span
+                  *ngIf="(loginForm.get('password').invalid && loginForm.get('password').touched && champObligatoirePassword) || champObligatoirePassword"
+
+                  class="form-item-error red small-rhis ml-1">
+                      {{"LOGIN.passwordError" | translate}}
+                    </span>
+              </div>
+              <span *ngIf="badCredential"
+                    class="form-item-error red small-rhis ml-1"
+                    id="AUTH-pwd-error">{{"LOGIN.BAD_CREDENTIAL" | translate}}</span>
+              <span *ngIf="notAuthorized"
+                    class="error-auth"
+                    id="AUTH-pwd-NotAuthorizedError">{{"LOGIN.NOT_AUTHORIZED" | translate}}</span>
+            </div>
+            <div class="simple-keyboard"
+                 [ngClass]="displayKeyboard  ? 'display__clavier' : 'display__clavier--not'"></div>
+            <button (click)="onLogin();$event.stopPropagation();"
+                    style="margin-top: 30px"
+                    class="btn button button__auth--block-all d-block mr-0 ml-auto"
+                    id="AUTH-connexion-btn"
+                    type="button">
+              <span>{{'CONNECTION.BUTTON_CONNECTION' | translate}}</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-blockUI [blocked]="displaySpinner" *ngIf="displaySpinner">
+  <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+    <p-progressSpinner></p-progressSpinner>
+    <span class="text-white">{{"Chargement" | translate}}</span>
+  </div>
+</p-blockUI>

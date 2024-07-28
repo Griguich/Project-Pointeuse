@@ -1,0 +1,24 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: $color--base !important;
+  height: 100%;
+  font-family: "TT Wellingtons Medium";
+}
+
+*:focus {
+  outline: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+.container-100{
+  height: 100%;
+  width: 100%;
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "idPointage": 1,
+    "idShift": 1,
+    "idEmployee": 121558,
+    "dateJournee": "2019-09-17",
+    "heureDebut": "02:00",
+    "heureFin": "03:30",
+    "heureDebutIsNight": true,
+    "heureFinIsNight": true,
+    "tempsPointes": 90,
+    "sortie": 0,
+    "arrives": 0,
+    "modified": false,
+    "correctionPointages":[]
+  },
+  {
+    "idPointage": 2,
+    "idShift": 4,
+    "idEmployee": 121558,
+    "dateJournee": "2019-09-17",
+    "heureDebut": "20:00",
+    "heureFin": "22:30",
+    "heureDebutIsNight": false,
+    "heureFinIsNight": false,
+    "tempsPointes": 150,
+    "sortie": 0,
+    "arrives": 0,
+    "modified": true,
+    "correctionPointages":[]
+
+  },
+  {
+    "idPointage": 44,
+    "idShift": null,
+    "idEmployee": 121558,
+    "dateJournee": "2019-09-17",
+    "heureDebut": "19:00",
+    "heureFin": "21:00",
+    "heureDebutIsNight": false,
+    "heureFinIsNight": false,
+    "tempsPointes": 120,
+    "sortie": 0,
+    "arrives": 0,
+    "modified": true,
+    "correctionPointages":[]
+
+  },
+  {
+    "idPointage": 21,
+    "idShift": null,
+    "idEmployee": 34272,
+    "dateJournee": "2019-09-17",
+    "heureDebut": "12:00",
+    "heureFin": "15:30",
+    "heureDebutIsNight": false,
+    "heureFinIsNight": false,
+    "tempsPointes": 210,
+    "sortie": 0,
+    "arrives": 0,
+    "modified": false
+  }, {
+    "idPointage": 119595,
+    "idShift": null,
+    "idEmployee": 119595,
+    "dateJournee": "2019-09-17",
+    "heureDebut": "12:00",
+    "heureFin": "15:30",
+    "heureDebutIsNight": false,
+    "heureFinIsNight": false,
+    "tempsPointes": 210,
+    "sortie": 0,
+    "arrives": 0,
+    "modified": false
+  },
+  {
+    "idPointage": 210,
+    "idShift": null,
+    "idEmployee": 15271,
+    "dateJournee": "2019-09-17",
+    "heureDebut": "12:00",
+    "heureFin": "14:00",
+    "heureDebutIsNight": false,
+    "heureFinIsNight": false,
+    "tempsPointes": 120,
+    "sortie": 0,
+    "arrives": 0,
+    "modified": false,
+    "correctionPointages":[]
+
+  },
+  {
+    "idPointage": 4,
+    "idShift": 2,
+    "idEmployee": 121558,
+    "dateJournee": "2019-09-17",
+    "heureDebut": "19:40",
+    "heureFin": "22:20",
+    "heureDebutIsNight": false,
+    "heureFinIsNight": false,
+    "tempsPointes": 160,
+    "sortie": 20,
+    "arrives": -20,
+    "modified": false,
+    "correctionPointages":[]
+
+  },
+  {
+    "idPointage": 5,
+    "idShift": 3,
+    "dateJournee": "2019-09-17",
+    "heureDebut": "00:40",
+    "heureFin": "02:20",
+    "heureDebutIsNight": true,
+    "heureFinIsNight": true,
+    "tempsPointes": 100,
+    "sortie": 20,
+    "arrives": 40,
+    "modified": false,
+    "correctionPointages":[]
+
+  },
+  {
+    "idPointage": 6,
+    "idShift": 3,
+    "dateJournee": "2019-09-17",
+    "heureDebut": "16:40",
+    "heureFin": "18:20",
+    "heureDebutIsNight": false,
+    "heureFinIsNight": false,
+    "tempsPointes": 120,
+    "sortie": 0,
+    "arrives": 0,
+    "modified": false,
+    "correctionPointages":[]
+
+  },
+  {
+    "idPointage": 7,
+    "idShift": 716,
+    "idEmployee": 15273,
+    "dateJournee": "2019-09-17",
+    "heureDebut": "13:00",
+    "heureFin": "15:00",
+    "heureDebutIsNight": false,
+    "heureFinIsNight": false,
+    "tempsPointes": 120,
+    "sortie": 0,
+    "arrives": 0,
+    "modified": true,
+    "correctionPointages":[]
+
+  },
+  {
+    "idPointage": 8,
+    "idShift": 111,
+    "idEmployee": 13954,
+    "dateJournee": "2019-09-17",
+    "heureDebut": "13:30",
+    "heureFin": "15:30",
+    "heureDebutIsNight": false,
+    "heureFinIsNight": false,
+    "tempsPointes": 120,
+    "sortie": 30,
+    "arrives": 30,
+    "modified": false,
+    "correctionPointages":[]
+
+  }
+]

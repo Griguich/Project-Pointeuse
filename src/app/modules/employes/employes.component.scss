@@ -1,0 +1,122 @@
+@import '../../../styles/generique';
+
+.block__contenu-page--top-icons.list-icons {
+  @include align-block__end--same-line;
+
+  div[class^="list-icons__icon-"] {
+    margin: 0 5px;
+    cursor: pointer;
+
+    img {
+      width: 55px;
+      border-radius: 50%;
+      @include box-shadow__generigue;
+      @media screen and (max-width: 991px) {
+        width: 45px;
+      }
+      @media screen and (max-width: 767px) {
+        width: 40px;
+      }
+    }
+  }
+}
+
+
+
+:host ::ng-deep {
+  .table-list p-table .ui-table table .ui-table-thead > tr > th {
+    padding-right: 0;
+  }
+
+  .table-list p-table .ui-table table .ui-table-thead > tr > th,
+  .table-list p-table .ui-table table .ui-table-tbody > tr > td {
+    text-align: left;
+    padding-left: 0;
+
+    &:nth-child(1) {
+      width: 7%;
+      padding: 10px 0 10px 15px;
+      @media screen and (max-width: 767px) {
+        width: 10%;
+      }
+    }
+
+    &:nth-child(2) {
+      width: 7%;
+      @media screen and (max-width: 767px) {
+        width: 10%;
+      }
+    }
+
+    &:nth-child(3) {
+      width: 30%;
+      @media screen and (max-width: 767px) {
+        width: 27%;
+      }
+    }
+
+    &:nth-child(4) {
+      width: 30%;
+      @media screen and (max-width: 767px) {
+        width: 27%;
+      }
+    }
+
+    &:nth-child(5) {
+      text-align: left;
+      padding-left: 0;
+    }
+  }
+}
+
+.block-right-emp {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: stretch;
+  .search {
+    height: 38px;
+    width: 296px;
+    border-radius: 19px;
+    background-color: #FFFFFF;
+    float: left;
+    margin: 0 15px;
+    border: 1px solid #d1d1d9;
+    input {
+      float: left;
+      outline: none;
+      height: inherit;
+      width: 235px;
+      margin-left: 20px;
+      border: none;
+      background-color: transparent;
+      color: #AFA899;
+      font-family: "TT Wellingtons Light";
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    span {
+      float: right;
+      margin-top: 5px;
+      margin-right: 18px;
+      cursor: pointer;
+    }
+  }
+}
+
+.simple-keyboard {
+  position: absolute;
+}
+
+.hg-theme-default {
+  top: 65px;
+  right: 20px !important;
+  left: inherit !important;
+  transform: translate(0, 0);
+  height: 228px;
+  z-index: 999999;
+}
+

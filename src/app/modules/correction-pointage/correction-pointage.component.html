@@ -1,0 +1,51 @@
+<div class="block__contenu-page">
+  <div class="block__contenu-page--top">
+    <h2 class="block__contenu-page--top-titre">{{'CORRECTION_POINTAGE.TITLE' | translate}}
+      {{ currentDateJournee}}</h2>
+  </div>
+
+  <div class="block__contenu-page-table">
+    <div class="table-list table-list__last-child--center">
+      <p-table [value]="listCorrections" *ngIf="listCorrections?.length !== 0; else messageTemplate">
+        <ng-template pTemplate="header" let-columns>
+          <tr class="header-row">
+            <th *ngFor="let col of header">
+              {{col?.field}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-correction let-i="rowIndex">
+          <tr class="table-row">
+            <td>
+              <div> {{correction?.prenomEmploye}} {{correction?.nomEmploye}} ({{correction?.badgeEmployee}})
+              </div>
+            </td>
+            <td>
+              <div>{{correction?.prenomManager}} {{correction?.nomManager}}</div>
+            </td>
+            <td>
+              <div *ngIf="correction?.isEntryPointing; else pointageSortie">{{'CORRECTION_POINTAGE.ENTREE' | translate}}
+                {{correction?.typeCorrection.slice(0, 1)  | uppercase}}</div>
+              <ng-template #pointageSortie>
+                <div>{{'CORRECTION_POINTAGE.SORTIE' | translate}} {{correction?.typeCorrection.slice(0, 1)  | uppercase}}</div>
+              </ng-template>
+            </td>
+            <td>
+              <div> {{correction?.oldValue}}</div>
+            </td>
+            <td>
+              <div>{{correction?.newValue}}</div>
+            </td>
+            <td>
+              <div>{{correction?.dateModification | date: 'dd/MM/yyyy'}} {{'CORRECTION_POINTAGE.A' | translate}} {{correction?.dateModification | date: 'HH:mm'}}</div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+    </div>
+    <ng-template #messageTemplate>
+      <p-message severity="info" class="message__info-general" [text]='listVideMessage'></p-message>
+    </ng-template>
+  </div>
+</div>

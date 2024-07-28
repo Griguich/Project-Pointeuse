@@ -1,0 +1,126 @@
+<div [ngClass]="{'smallSize-menu menu-display': sizeScreenSmall}">
+  <input type="checkbox" id="menu">
+  <label for="menu" class="icon"
+         (click)="menuStateTabletteStatus()">
+    <div class="menu"></div>
+  </label>
+</div>
+
+<nav [ngClass]="{'smallSize-menu': sizeScreenSmall,
+                 'menu-opened': menuState}">
+  <ul *ngFor="let col of menu; index as i">
+    <li (click)="clickItem($event, i, col)"
+        [id]="col | menuItemId : isManagerMenu : isTechnicienMenu"
+        [ngClass]="{'item__Clicked': col.clicked, 'item__no-Clicked': !col.clicked,
+        'center-menu-pointeuse': sizeScreenSmall}"
+        [routerLink]="col.routerLink">
+      <img *ngIf="col.clicked" alt="" src="{{col?.imageClicked}}">
+      <img *ngIf="!col.clicked" alt="" src="{{col?.imageNoClicked}}">
+      <span>{{col?.title | translate}}</span>
+    </li>
+    <li *ngIf="i === 7 && isManagerMenu">
+      <img *ngIf="col.clicked" alt="" src="{{col?.imageClicked}}">
+      <img *ngIf="!col.clicked" alt="" src="{{col?.imageNoClicked}}">
+    </li>
+  </ul>
+</nav>
+
+
+<rhis-pop-up (closeEvent)="closePopup()" [height]="popUpStyle?.height"
+             [showPopUp]="popupSynchronisation" [width]="popUpStyle?.width"
+             title=" {{'POPUP_SYNCHRONISATION.TITLE' |translate}} ">
+  <div *ngIf="!syncEnCours; else ProgressBar;">
+    <form [formGroup]="syncForm">
+      <div class="row">
+        <span class="modal-sync-title">{{'POPUP_SYNCHRONISATION.FORM_TITLE' | translate}}</span>
+      </div>
+      <br>
+      <div class="row synchro-timework style-synchro-generique">
+        <div class="col-5">
+          <div class="row" style="padding-top: 3px;">
+            <div class="col-3">
+              <p-checkbox binary="true" formControlName="syncPointages" id="RESTAURANT_synPointage-checkbox"
+                          name="syncPointages">
+              </p-checkbox>
+            </div>
+            <div class="col-9" style="padding-left: 7px">
+              <label
+                for="RESTAURANT_synPointage-checkbox"
+                style="display: block">{{"POPUP_SYNCHRONISATION.SYNC_POINTAGES" | translate}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-7">
+          <p-calendar [locale]="calendarFr"
+                      [maxDate]="maxDate"
+                      [monthNavigator]="true" [showIcon]="true"
+                      [(ngModel)]="dateJournee"
+                      inputmode='none'
+                      dateFormat="dd/mm/yy" formControlName="dateJournee" id="dateJournee" name="dateJournee"
+                      inputId="icon"
+                      readonly
+                      rhisStyleForm>
+          </p-calendar>
+        </div>
+      </div>
+      <div class="row style-synchro-generique">
+        <div class="col-1">
+          <p-checkbox binary="true" formControlName="syncEmployes" id="RESTAURANT_synEmployee-checkbox"
+                      name="syncEmployes"></p-checkbox>
+        </div>
+        <div class="col-8">
+          <label for="RESTAURANT_synEmployee-checkbox"
+                 style="display: block">{{"POPUP_SYNCHRONISATION.SYNC_EMPLOYES" | translate}}
+            / {{"POPUP_SYNCHRONISATION.SYNC_CS" | translate}}</label>
+        </div>
+      </div>
+      <div *ngIf="isPretActive" class="row style-synchro-generique">
+        <div class="col-1">
+          <p-checkbox binary="true" formControlName="syncPret" id="RESTAURANT_syncPret-checkbox"
+                      name="syncPret"></p-checkbox>
+        </div>
+        <div class="col-8">
+          <label for="RESTAURANT_syncPret-checkbox"
+                 style="display: block">{{"PRET.TITLE" | translate}}</label>
+        </div>
+      </div>
+      <div class="row style-synchro-generique">
+        <div class="col-1">
+          <p-checkbox binary="true" formControlName="syncPlanning" id="RESTAURANT_synPlanning-checkbox"
+                      name="syncPlanning"></p-checkbox>
+        </div>
+        <div class="col-8">
+          <label for="RESTAURANT_synPlanning-checkbox"
+                 style="display: block">{{"POPUP_SYNCHRONISATION.SYNC_PLANNING" | translate}}</label>
+        </div>
+      </div>
+      <div class="row style-synchro-generique">
+        <div class="col-1">
+          <p-checkbox binary="true" formControlName="syncParam" id="RESTAURANT_synParam-checkbox"
+                      name="syncParam"></p-checkbox>
+        </div>
+        <div class="col-6">
+          <label for="RESTAURANT_synParam-checkbox"
+                 style="display: block">{{"POPUP_SYNCHRONISATION.SYNC_PARAM" | translate}}</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col align-self-end">
+          <button (click)="synchronize()"
+                  class="btn button-popup-rhis orange-background color-btn-white-rhis btn-save-rhis"
+                  id="RESTAURANT_synchro-btn"
+                  type="button">
+            <span>{{'POPUP_SYNCHRONISATION.SYNCHRONISER' | translate}}</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-template #ProgressBar>
+    <p-progressBar [value]="value"></p-progressBar>
+  </ng-template>
+</rhis-pop-up>
+
+
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<p-confirmDialog [appendTo]="'body'"></p-confirmDialog>

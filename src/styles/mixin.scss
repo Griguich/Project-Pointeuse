@@ -1,0 +1,54 @@
+@mixin align-block__center--same-line {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: stretch;
+}
+
+@mixin align-block__end--same-line {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+@mixin block-center__space-between {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: stretch;
+}
+
+@mixin box-shadow__generigue {
+  box-shadow: 0 0 15px #d6d6d6;
+}
+
+@mixin border-radius__generique($a, $b, $c, $d) {
+  border-top-left-radius: $a;
+  border-top-right-radius: $b;
+  border-bottom-right-radius: $c;
+  border-bottom-left-radius: $d;
+}
+
+@mixin button__generique--color($color, $border-radius) {
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "TT Wellingtons DemiBold", sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: $border-radius;
+  letter-spacing: 1.2px;
+  padding: 20px 18px;
+  background: $color;
+  @include box-shadow__generigue;
+  &:hover {
+    color: #fff;
+  }
+}
+

@@ -1,0 +1,359 @@
+@import '../../../../styles/generique';
+
+th {
+  color: #9E9E9E !important;
+
+  &:last-child {
+    text-align: left !important;
+  }
+}
+
+col:last-child {
+  width: 230px;
+}
+
+.day-hour-table-row {
+  font-family: "TT Wellingtons Medium", sans-serif;
+  cursor: pointer;
+  font-size: 14px;
+  color: #9B9B9B;
+  background-color: #f1f1f1 !important;
+  text-align: center;
+
+  &:hover {
+    background-color: #efefef !important;
+  }
+
+  td {
+    font-weight: 500;
+    line-height: 20px;
+    border: none !important;
+    padding: 12px 0 !important;
+    vertical-align: top !important;
+  }
+
+  td {
+    border-left: 1pt dotted #cccccc !important;
+
+    &:nth-child(odd) {
+      border-left: 1pt dotted #999999 !important;
+    }
+
+    &:nth-child(1), &:nth-child(2) {
+      border: none !important;
+    }
+  }
+
+  .last-half-hour {
+    border-right: 1pt dotted #999999 !important;
+  }
+}
+
+.fitContent {
+  width: fit-content;
+  max-width: fit-content;
+}
+
+.planning-table {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/********************************************************************************************************/
+/*****************************            INTEGRATION Page Live            *****************************/
+/************************////////////////////////////////////////////////////////**********************/
+
+.general-contenu {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-rows: 80px auto;
+  grid-template-columns: 1fr;
+  height: 10%;
+
+  &--header {
+    display: flex;
+    grid-gap: 0;
+    grid-template-rows: 70px;
+    grid-template-columns: 70px repeat(3, 1fr);
+    align-items: center;
+    background: #fff;
+    width: 100%;
+    z-index: 99;
+    justify-content: space-between;
+    font-family: "TT Wellingtons DemiBold", sans-serif;
+    box-shadow: 0 0.5rem 1.2rem rgb(0 0 0 / 20%);
+    padding: 5px;
+    position: fixed;
+
+    .logo {
+      img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    .restaurant-name {
+      h1.title {
+        color: $color-title;
+        font-family: "TT Wellingtons Medium", sans-serif;
+        font-size: 14px;
+        padding-left: 5px;
+        font-weight: 500;
+        max-width: 150px;
+        text-align: left;
+        line-height: 20px;
+        margin-bottom: 0;
+      }
+    }
+
+    .date {
+      font-size: 18px;
+      line-height: 22px;
+      text-align: center;
+      font-weight: bold;
+      font-family: "TT Wellingtons Medium", sans-serif;
+      color: $color--text;
+      padding-right: 18%;
+    }
+  }
+
+  .content-live {
+    box-shadow: 0 0.5rem 1.2rem rgb(0 0 0 / 20%);
+    top: 90px;
+    position: relative;
+    height: calc(100vh - 90px);
+
+    .content-planning {
+      padding: 0 15px;
+    }
+  }
+
+  .footer__badge {
+    position: absolute;
+    bottom: 0;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "TT Wellingtons Medium", sans-serif;
+    color: #414141;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    padding-bottom: 15px;
+  }
+}
+
+#codeBadge {
+  width: 100%;
+  height: 51px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #d1d1d9;
+  font-family: "TT Wellingtons Medium", sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  max-width: 180px;
+  text-align: center;
+}
+
+/********************************************************************************************************/
+/********************************            Block Real Time            ********************************/
+/************************////////////////////////////////////////////////////////**********************/
+
+/********************************************************************************************************/
+/********************************            Block Real Time            ********************************/
+/************************////////////////////////////////////////////////////////**********************/
+
+.block-real-time {
+  border-left: 2px solid #ea4335;
+  position: absolute;
+  top: 100px;
+  background: #ea4335;
+}
+
+.block__contenu-page--top {
+  margin: 0;
+  align-items: start;
+
+  &-titre {
+    line-height: 32px;
+  }
+  .header-date {
+    width: 51%;
+  }
+}
+
+.circle {
+  display: inline-block;
+  vertical-align: middle;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  top: -6px;
+  left: calc(50% - 5px);
+  background: #ea4335;
+  border-color: #ea4335;
+}
+
+/********************************************************************************************************/
+/*************************            Modification style prime ng            ***************************/
+/************************////////////////////////////////////////////////////////**********************/
+
+:host ::ng-deep {
+  .entry-class .ui-dropdown {
+    height: 40px;
+  }
+
+  .planning-table.table-list p-table .ui-table table .ui-table-tbody > tr {
+    background-color: #dedede !important;
+  }
+
+  .table-list .ui-table .ui-table-unfrozen-view {
+    height: 65px !important;
+
+    .ui-table-tbody > tr > td {
+      height: 65px !important;
+
+      &:first-child {
+        border-radius: unset !important;
+      }
+    }
+  }
+
+  .table-list .ui-table .ui-table-frozen-view .ui-table-tbody > tr > td {
+    height: 65px !important;
+  }
+
+  .table-list .ui-table .ui-table-unfrozen-view .ui-table-thead > tr > th {
+    padding-bottom: 6px !important;
+  }
+
+  .table-list .ui-table .ui-table-frozen-view .ui-table-thead > tr > th {
+    padding-bottom: 1px !important;
+  }
+
+  .table-list .ui-table .ui-table-frozen-view .ui-table-tbody > tr > td {
+    border-radius: 8px 0 0 8px;
+  }
+
+  .table-list .ui-table-scrollable-body {
+    overflow-x: auto !important;
+    padding-right: 0;
+  }
+
+  .table-list .ui-table-scrollable-body::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+    background-color: #F5F5F5;
+  }
+
+  .table-list .ui-table-scrollable-body:hover::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    background-color: #F5F5F5;
+  }
+
+  .table-list .ui-table-scrollable-body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+  }
+
+  .table-list .ui-table-scrollable-body::-webkit-scrollbar-thumb {
+    background: #a8a8a8;
+  }
+
+  .table-list p-table .ui-table table .ui-table-tbody > tr > td:nth-child(1) {
+    vertical-align: middle !important;
+  }
+
+  .ui-table-unfrozen-view {
+    left: 80px;
+
+    .ui-table-scrollable-body-table {
+      margin-left: -30px;
+    }
+
+    .ui-table-scrollable-header {
+      margin-left: -18px;
+    }
+  }
+
+  .simple-keyboard.hg-theme-default.hg-layout-numeric {
+    width: 200px;
+    position: absolute;
+    z-index: 9;
+    box-shadow: 0 0 33px rgba(16, 14, 23, .33);
+    top: 66px;
+    height: 265px;
+    left: inherit;
+    transform: translate(0);
+    right: 5px;
+
+    .hg-button.hg-standardBtn {
+      font-size: 18px;
+    }
+
+    .hg-row:nth-child(4) .hg-button.hg-standardBtn {
+      background-color: #ff9b42 !important;
+      color: #000000;
+      text-transform: uppercase;
+    }
+
+    .btn0 {
+      background-color: #ffffff !important;
+      color: #000000;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+  }
+
+  .table-list .ui-table .ui-table-unfrozen-view {
+    .ui-table-thead > tr > th {
+      &:nth-last-child(2) {
+        display: none;
+      }
+
+      &:last-child {
+        padding-left: 23px;
+      }
+    }
+  }
+}
+.animated-placeholder::placeholder {
+  opacity: 0; /* make placeholder text transparent */
+  animation: slide-left 2s linear infinite; /* start the animation */
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(100%); /* move the text to the right */
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(0); /* bring the text back to its original position */
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%); /* move the text to the left */
+    opacity: 0;
+  }
+}
+.animated-div {
+  height: 0; /* set the initial height to 0 */
+  overflow: hidden; /* hide any overflow content */
+  transform: translateY(-100%); /* move the div up */
+  transition: transform 0.5s ease-in-out, height 0.5s ease-in-out; /* set the transitions */
+}
+
+.animated-div.show {
+  height: 100px; /* set the height to the desired value */
+  transform: translateY(0%); /* move the div down */
+  transition: transform 0.5s ease-in-out, height 0.5s ease-in-out; /* set the transitions */
+}
+

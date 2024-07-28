@@ -1,0 +1,59 @@
+<div class="block__contenu-page" *ngIf="!displaySelectedRapport">
+  <div class="block__contenu-page--top" (rhisHeightScrollableSection)="heightInterface = ($event + 'px')"
+       [offset]="200">
+    <h2 class="block__contenu-page--top-titre">{{'RAPPORT.LIST_RAPPORTS' | translate}}</h2>
+  </div>
+
+  <div class="block__contenu-page-table">
+    <div class="table-list table-list__last-child--center">
+      <p-table [value]="listRapport"
+               [scrollable]="true" [scrollHeight]="heightInterface">
+        <ng-template pTemplate="header" let-columns>
+          <tr class="header-row">
+            <th>{{'RAPPORT.MODULE' | translate}}</th>
+            <th>{{'RAPPORT.NOM' | translate}}</th>
+            <th>{{'RAPPORT.DERNIERE_UTILISATION' | translate}}</th>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rapport let-i="rowIndex">
+          <tr class="table-row" (dblclick)="showActionPopup(rapport)"
+              [id]="'RESTAURANT-'+ rapport?.codeName">
+            <td>
+              <div>
+                {{rapport?.categorie}}
+              </div>
+            </td>
+            <td>
+              <div>
+                {{rapport?.libelleFile}}
+              </div>
+            </td>
+            <td>
+              <div>
+                {{rapport?.lastUsed | date : "dd/MM/yyyy"}}
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+    </div>
+  </div>
+  <rhis-pop-up
+    (closeEvent)="showPopupRapport = false"
+    [showPopUp]="showPopupRapport"
+    [title]="selectedRapport?.libelleFile"
+    [width]="popUpStyle?.width">
+
+    <app-popup-rapports *ngIf="showPopupRapport"
+                        [initSelectedRapport]="selectedRapport"
+                        (generateRapportEvent)="launchGenerateRapport($event)"
+    ></app-popup-rapports>
+  </rhis-pop-up>
+</div>
+
+<app-affichage-rapports
+  [codeName]="selectedRapport?.codeName"
+  *ngIf="displaySelectedRapport">
+</app-affichage-rapports>
